@@ -1,7 +1,22 @@
-  <h1>
-     {{ title }}
-  </h1>
+<button kendoButton (click)="onButtonClick()">KendoButton</button>
 
+<div id="treecontainer">
+<kendo-treeview
+    [nodes]="data"
+    textField="text"
+    childrenField="items"
+    kendoTreeViewExpandable
+    kendoTreeViewHierarchyBinding
+    kendoTreeViewSelectable
+    >
+
+    <ng-template kendoTreeViewNodeTemplate let-dataItem>
+            <span [ngClass]="iconClass(dataItem)"></span>
+            <span> {{dataItem.text}} </span>
+            <span>[44]</span>
+    </ng-template>
+</kendo-treeview>
+</div>
 
 
 

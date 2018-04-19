@@ -5,32 +5,9 @@ const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileN
 @Component({
     // prevent style encapsulation
     encapsulation: ViewEncapsulation.None,
-
     selector: 'app-root',
-    template: `<button kendoButton (click)="onButtonClick()">Default</button>
-    <div>
-    <kendo-treeview
-        [nodes]="data"
-        textField="text"
-        kendoTreeViewExpandable
-
-        kendoTreeViewHierarchyBinding
-        childrenField="items"
-        >
-
-        <ng-template kendoTreeViewNodeTemplate let-dataItem>
-               <span [ngClass]="iconClass(dataItem)"></span>
-               <span> {{dataItem.text}} </span>
-               <span>[44]</span>
-        </ng-template>
-    </kendo-treeview>
-    </div>
-  `,
-  styles: [
-      `div { width: 400px; border: 2px solid blue; }
-       span { border: 3px solid green; }
-      `
-    ]
+    templateUrl: 'app.component.html',
+    styleUrls: [ 'app.component.scss' ]
 })
 export class AppComponent {
     public data: any[] = [{
