@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { of } from 'rxjs/observable/of';
 
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName);
 
@@ -7,11 +8,14 @@ const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileN
     encapsulation: ViewEncapsulation.None,
     selector: 'app-root',
     templateUrl: 'app.component.html',
-    styleUrls: [ 'app.component.scss' ]
+    styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+    public selectedKeys: any[] = ['0_2'];
+    public expandedKeys: any[] = ['0'];
     public data: any[] = [{
         text: 'Work Orders',
+        expanded: true,
         items: [
             { text: 'Unassigned' },
             { text: 'Late' },
@@ -50,6 +54,7 @@ export class AppComponent {
             }
         ]
     }];
+
 
     public iconClass({ text, items }: any): any {
         return {

@@ -1,22 +1,23 @@
 <button kendoButton (click)="onButtonClick()">KendoButton</button>
-
+<div class="workorder-number">
+    WorkOrder# {{selectedKeys.join("_")}}
+    (Expanded Nodes: {{expandedKeys.join(",")}})
+</div>
 <div id="treecontainer">
-<kendo-treeview
-    [nodes]="data"
-    textField="text"
-    childrenField="items"
-    kendoTreeViewExpandable
-    kendoTreeViewHierarchyBinding
-    kendoTreeViewSelectable
+    <kendo-treeview
+        [nodes]="data"
+        textField="text"
+        childrenField="items"
+        kendoTreeViewExpandable
+        kendoTreeViewHierarchyBinding      
+        [kendoTreeViewSelectable]="{ mode: 'single' }"
+        [(selectedKeys)]="selectedKeys"
+        [(expandedKeys)]="expandedKeys"
     >
-
     <ng-template kendoTreeViewNodeTemplate let-dataItem>
             <span [ngClass]="iconClass(dataItem)"></span>
             <span> {{dataItem.text}} </span>
-            <span>[44]</span>
+            <span class="custom-right">[44]</span>
     </ng-template>
-</kendo-treeview>
-</div>
-
-
-
+    </kendo-treeview>
+ </div>
