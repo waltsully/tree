@@ -1,20 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 
+import { AppComponent } from './app.component';
+import { QueuesComponent } from './workorders/queues.component';
+
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        QueuesComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         ButtonsModule,
         TreeViewModule

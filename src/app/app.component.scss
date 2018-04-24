@@ -1,22 +1,3 @@
-#treecontainer { 
-    width: 300px; 
-    border: 5px dotted black; 
-    overflow:hidden; 
+body {
+    margin-left:50px;
 }
-
-.k-treeview-lines .k-mid .k-in {
-    border: 1px solid green;
-    width: 100%;
-    }
-
-.k-treeview-lines .k-mid .k-in .custom-right {
-    position: absolute;
-    right: 5px;
-    display: inline-block;
-    padding: 2px;
-    border: 1px solid red;
-    } 
-    
-    .workorder-number {
-        
-    }
