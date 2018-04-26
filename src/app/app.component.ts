@@ -9,6 +9,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 
 export class AppComponent {
-    private _foo;
+    myCount = 10;
+    countChanged(event) {
+        this.myCount = event;
+    }
 }
-

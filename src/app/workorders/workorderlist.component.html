@@ -1,0 +1,31 @@
+<div>{{errorMessage}}</div>
+<div class="workorder-number">
+  (debug) Nodes Selected: {{selectedKeys.join()}}
+          Expanded: {{expandedKeys.join(",")}}
+          <br>UserId: {{userId}}
+          <br>UserName: {{userName}}
+</div>
+<div class="workOrderList">
+    <div class="boxtitle">
+        <div class="innerborder">
+            <span class="boxtext"> WorkOrders</span>
+        </div>
+    </div>
+
+    <kendo-grid
+    [data]="data"
+    selectable="true"
+    style="height: 160px"
+    >
+    <kendo-grid-column field="ProductID"></kendo-grid-column>
+    <kendo-grid-column field="ProductName"></kendo-grid-column>
+    <kendo-grid-column field="UnitPrice"></kendo-grid-column>
+    <ng-template kendoGridDetailTemplate let-dataItem
+        [kendoGridDetailTemplateShowIf]="showOnlyBeveragesDetails">
+    <div *ngIf="dataItem.Category">
+        <header>{{dataItem.Category?.CategoryName}}</header>
+        <span>{{dataItem.Category?.Description}}</span>
+    </div>
+    </ng-template>
+    </kendo-grid>
+</div>

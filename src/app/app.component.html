@@ -1,2 +1,11 @@
 <h1><span class="logo">@</span> Web Work Orders</h1>
+
 <app-queues></app-queues>
+
+  <!-- Set-up to listen for events from children components -->
+  <div class="test">
+    <!-- testing of angular events -->
+    Demo of Child Component eventing to Parent<br>
+    Parent: {{ myCount }} <br>
+    Child: <app-counter [count]="myCount" (change)="countChanged($event)"></app-counter>
+  </div>

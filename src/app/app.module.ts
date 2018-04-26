@@ -9,11 +9,14 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
 
 import { AppComponent } from './app.component';
 import { QueuesComponent } from './workorders/queues.component';
+import { CounterComponent } from './workorders/counter.component';
+
 
 @NgModule({
     declarations: [
         AppComponent,
-        QueuesComponent
+        QueuesComponent,
+        CounterComponent
     ],
     imports: [
         BrowserModule,

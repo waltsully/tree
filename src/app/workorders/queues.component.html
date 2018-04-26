@@ -1,24 +1,29 @@
 
-<div class="workorder-number">
-  (debug) Nodes Selected: {{selectedKeys.join("_")}}
-    Expanded: {{expandedKeys.join(",")}}
+<div>{{errorMessage}}</div>
+<div class="debug">
+  (debug) Nodes Selected: {{selectedKeys.join()}}
+          Expanded: {{expandedKeys.join(",")}}
+          <br>UserId: {{userId}}
+          <br>UserName: {{userName}}
 </div>
-    <div class="queues">
+<div class="queues">
     <div class="boxtitle">
         <div class="innerborder">
             <span class="boxtext"> Queues</span>
         </div>
     </div>
-    <div id="treecontainer">
-         <kendo-treeview
+    <div #ktree id="treecontainer">
+        <kendo-treeview
             [nodes]="queues"
             textField="Caption"
-            childrenField="Children"         
-            kendoTreeViewExpandable
-            kendoTreeViewHierarchyBinding      
+            childrenField="Children"    
+            [hasChildren]="hasChildren" 
+            [children]="fetchChildren"        
+            kendoTreeViewExpandable          
             [kendoTreeViewSelectable]="{ mode: 'single' }"
             [(selectedKeys)]="selectedKeys"
-            [(expandedKeys)]="expandedKeys"
+            [(expandedKeys)]="expandedKeys"            
+            (selectionChange)="treeViewSelectionChanged($event)"            
         >
         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                 <span [ngClass]="iconClass(dataItem)"></span>
@@ -26,5 +31,5 @@
                 <span class="custom-right">[{{dataItem.Count}}]</span>
         </ng-template>
         </kendo-treeview>
-</div>
+    </div>
 </div>

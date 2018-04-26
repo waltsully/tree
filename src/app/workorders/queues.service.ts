@@ -11,7 +11,7 @@ import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
 export class QueuesService {
-    private _devqueuesUrl = 'http://localhost:55299/api/workorder/getqueues/wsully';  
+    private _devqueuesUrl = 'http://localhost:55299/api/workorder/getqueues/wsully';
     private _queuesUrl = 'https://qa-workorders.e-ins.net/api/workorder/getqueues/wsully';
 
     constructor(private _http: HttpClient) { }
