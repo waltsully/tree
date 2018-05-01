@@ -1,14 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 import { AppComponent } from './app.component';
 import { QueuesComponent } from './workorders/queues.component';
+import { WorkOrderListComponent } from './workorders/workorderlist.component';
 import { CounterComponent } from './workorders/counter.component';
 
 
@@ -16,6 +18,7 @@ import { CounterComponent } from './workorders/counter.component';
     declarations: [
         AppComponent,
         QueuesComponent,
+        WorkOrderListComponent,
         CounterComponent
     ],
     imports: [
@@ -23,8 +26,9 @@ import { CounterComponent } from './workorders/counter.component';
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        ButtonsModule,
-        TreeViewModule
+        TreeViewModule,
+        GridModule,
+        ButtonsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

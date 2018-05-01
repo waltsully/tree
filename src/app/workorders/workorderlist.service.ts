@@ -5,25 +5,24 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-import { IQueue } from './queue';
+import { IWorkOrderInfo } from './workorderinfo';
 import { HttpResponse } from 'selenium-webdriver/http';
 
-
 @Injectable()
-export class QueuesService {
-    private _devqueuesUrl = 'http://localhost:55299/api/workorder/getqueues/wsully';
-    private _queuesUrl = 'https://qa-workorders.e-ins.net/api/workorder/getqueues/wsully';
+export class WorkOrderListService {
+    private _devworkorderlistUrl = 'http://localhost:55299/api/workorder/getassigned/wsully';
+    private _workorderlistUrl = 'https://qa-workorders.e-ins.net/api/workorder/getassigned/wsully';
 
     constructor(private _http: HttpClient) { }
 
-    public getQueues(): Observable<IQueue[]> {
-        return this._http.get<IQueue[]>(this._devqueuesUrl)
+    public getWorkOrderList(): Observable<IWorkOrderInfo[]> {
+        return this._http.get<IWorkOrderInfo[]>(this._devworkorderlistUrl)
         .do (data => console.log('data: ' + JSON.stringify(data)))
         .catch(this.errorHandler);
     }
 
     private errorHandler(ex: HttpErrorResponse) {
-        console.log('queues.service.ts ERROR: ' + ex.message);
+        console.log('workorderlist.service.ts ERROR: ' + ex.message);
         return Observable.throw(ex);
     }
 }

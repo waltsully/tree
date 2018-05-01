@@ -1,31 +1,27 @@
-<div>{{errorMessage}}</div>
-<div class="workorder-number">
-  (debug) Nodes Selected: {{selectedKeys.join()}}
-          Expanded: {{expandedKeys.join(",")}}
-          <br>UserId: {{userId}}
-          <br>UserName: {{userName}}
-</div>
+<div class="error">{{errorMessage}}</div>
 <div class="workOrderList">
     <div class="boxtitle">
         <div class="innerborder">
-            <span class="boxtext"> WorkOrders</span>
+            <span class="boxtext">Work Orders {{userName}}</span>
         </div>
     </div>
+    <kendo-grid #grid [data]="workorderlist" [rowClass]="rowEventCallBack"
+        (detailExpand)="onExpand($event.dataItem, $event.index)">
+            <kendo-grid-column field="alert" title="*" width="10"></kendo-grid-column>
+            <kendo-grid-column field="flag" title="*" width="10"></kendo-grid-column>
+            <kendo-grid-column field="attachment" title="*" width="10"></kendo-grid-column>
+            <kendo-grid-column field="WorkOrderNumber" title="WO#" width="40"></kendo-grid-column>
+            <kendo-grid-column field="UserName" title="Assigned To" width="40"></kendo-grid-column> 
+            <kendo-grid-column field="DateDue" title="Due Date" width="30">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                   {{dataItem.DateDue | date:'shortDate'}}
+                </ng-template>
+            </kendo-grid-column>
 
-    <kendo-grid
-    [data]="data"
-    selectable="true"
-    style="height: 160px"
-    >
-    <kendo-grid-column field="ProductID"></kendo-grid-column>
-    <kendo-grid-column field="ProductName"></kendo-grid-column>
-    <kendo-grid-column field="UnitPrice"></kendo-grid-column>
-    <ng-template kendoGridDetailTemplate let-dataItem
-        [kendoGridDetailTemplateShowIf]="showOnlyBeveragesDetails">
-    <div *ngIf="dataItem.Category">
-        <header>{{dataItem.Category?.CategoryName}}</header>
-        <span>{{dataItem.Category?.Description}}</span>
-    </div>
-    </ng-template>
-    </kendo-grid>
+                <ng-template kendoGridDetailTemplate let-dataItem>
+                <span *ngIf="dataItem.Detail">
+                  Description: {{dataItem.Detail.Description}}                 
+                </span>
+              </ng-template>
+    </kendo-grid>      
 </div>

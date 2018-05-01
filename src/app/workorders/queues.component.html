@@ -1,17 +1,16 @@
-
-<div>{{errorMessage}}</div>
-<div class="debug">
-  (debug) Nodes Selected: {{selectedKeys.join()}}
-          Expanded: {{expandedKeys.join(",")}}
-          <br>UserId: {{userId}}
-          <br>UserName: {{userName}}
-</div>
+<div class="error">{{errorMessage}}</div>
 <div class="queues">
     <div class="boxtitle">
         <div class="innerborder">
             <span class="boxtext"> Queues</span>
         </div>
     </div>
+    <span class="debug" style="display:inline-block;">
+            (debug) Nodes Selected: {{selectedKeys.join()}}
+                    Expanded: {{expandedKeys.join(",")}}
+                    <br>UserId: {{userId}}
+                    <br>UserName: {{userName}}
+    </span>
     <div #ktree id="treecontainer">
         <kendo-treeview
             [nodes]="queues"
@@ -32,4 +31,4 @@
         </ng-template>
         </kendo-treeview>
     </div>
-</div>
+</div>    

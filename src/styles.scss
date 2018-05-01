@@ -1,2 +1,14 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~@progress/kendo-theme-bootstrap/";
+
+// application scope SCSS
+
+body {
+    margin-left:50px;   
+    font-size: 8pt;
+}
+.error {
+    display: inline;
+    color: red;
+    background-color: white;
+}

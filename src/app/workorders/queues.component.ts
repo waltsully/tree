@@ -4,7 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { QueuesService } from './queues.service';
 import { IQueue } from './queue';
 
-const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName);
+const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
 
 @Component({
     // prevent style encapsulation is needed to "see" the kendo k- classes
