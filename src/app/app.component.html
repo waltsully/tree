@@ -1,11 +1,11 @@
-<h1><span class="logo">@</span> Web Work Orders</h1>
+<img class="logo" src="./assets/logo.png" alt="e-ins logo"><span class="apptitle">Web Work Order System</span>
 
 <div class= "appframe">
   <div class="leftpanel">
-    <app-queues></app-queues>
+    <app-queues (selectedNodeChanged)='onQueueSelectedItem($event)'></app-queues>
   </div>   
   <div class="middlepanel">
-    <app-workorderlist></app-workorderlist>
+    <app-workorderlist [focusQueue]='name'></app-workorderlist>
   </div>
   <div class="rightpanel">
     detail component will go here
@@ -16,7 +16,5 @@
   <!-- Set-up to listen for events from children components -->
   <div class="test">
     <!-- testing of angular events -->
-    Demo of Child Component eventing to Parent<br>
-    Parent: {{ myCount }} <br>
-    Child: <app-counter [count]="myCount" (change)="countChanged($event)"></app-counter>
+
   </div>

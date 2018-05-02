@@ -2,11 +2,14 @@
 <div class="workOrderList">
     <div class="boxtitle">
         <div class="innerborder">
-            <span class="boxtext">Work Orders {{userName}}</span>
+            <span class="boxtext">Work Orders - {{focusQueue}}</span>
         </div>
     </div>
-    <kendo-grid #grid [data]="workorderlist" [rowClass]="rowEventCallBack"
-        (detailExpand)="onExpand($event.dataItem, $event.index)">
+    <kendo-grid #grid 
+        [data]="workorderlist" 
+        [selectable]="true"
+        (selectionChange)="onRowSelected($event)"       
+        style="font-size: inherit;">
             <kendo-grid-column field="alert" title="*" width="10"></kendo-grid-column>
             <kendo-grid-column field="flag" title="*" width="10"></kendo-grid-column>
             <kendo-grid-column field="attachment" title="*" width="10"></kendo-grid-column>

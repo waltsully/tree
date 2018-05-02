@@ -1,20 +1,22 @@
 <div class="error">{{errorMessage}}</div>
-<div class="queues">
+<div class="workOrderQueues">
     <div class="boxtitle">
         <div class="innerborder">
             <span class="boxtext"> Queues</span>
         </div>
     </div>
+    <!-- Developemnt debugging...
     <span class="debug" style="display:inline-block;">
             (debug) Nodes Selected: {{selectedKeys.join()}}
                     Expanded: {{expandedKeys.join(",")}}
                     <br>UserId: {{userId}}
                     <br>UserName: {{userName}}
     </span>
-    <div #ktree id="treecontainer">
-        <kendo-treeview
+     -->
+    <div #ktree class="treecontainer">
+        <kendo-treeview style="font-size: inherit;"
             [nodes]="queues"
-            textField="Caption"
+            textField="Caption" 
             childrenField="Children"    
             [hasChildren]="hasChildren" 
             [children]="fetchChildren"        
@@ -22,7 +24,7 @@
             [kendoTreeViewSelectable]="{ mode: 'single' }"
             [(selectedKeys)]="selectedKeys"
             [(expandedKeys)]="expandedKeys"            
-            (selectionChange)="treeViewSelectionChanged($event)"            
+            (selectionChange)="onSelect($event)"            
         >
         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                 <span [ngClass]="iconClass(dataItem)"></span>

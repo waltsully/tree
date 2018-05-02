@@ -1,4 +1,4 @@
-import { Component,  OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component,  OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 
 import { QueuesService } from './queues.service';
@@ -25,7 +25,7 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     public userId: string;
     public queues: IQueue[] = [];
     public errorMessage: string;
-
+    @Output() selectedNodeChanged: EventEmitter<string> = new EventEmitter<string>();
     constructor(queuesService: QueuesService) {
         this._dataService = queuesService;
     }
@@ -33,10 +33,12 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     public hasChildren = (item: IQueue) => item.Children && item.Children.length > 0;
     public fetchChildren = (item: IQueue) => of(item.Children);
 
-    public treeViewSelectionChanged({ index, dataItem }: any): void {
-        this.selectedKeys = [index];
-        this.userId = dataItem.UserId;
-        this.userName = dataItem.Caption;
+    // we handle treeview navigation event here...
+    public onSelect({ index, dataItem }: any): void {
+        this.selectedKeys = [index];                      // debugging
+        this.userId = dataItem.UserId;                    // debugging
+        this.userName = dataItem.Caption;                 // debugging
+        this.selectedNodeChanged.emit(dataItem.Caption);  // propagate to parent container
     }
 
     public iconClass(node: IQueue): any {

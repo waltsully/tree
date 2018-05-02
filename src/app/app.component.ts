@@ -9,8 +9,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 
 export class AppComponent {
-    public myCount = 10;
-    countChanged(event) {
-        this.myCount = event;
+    public name: string;
+
+    onQueueSelectedItem (data: string): void {
+       console.log ('onQueueSelectedItem: ' + data);
+       this.name = data;
     }
 }

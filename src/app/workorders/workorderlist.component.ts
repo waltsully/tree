@@ -1,7 +1,7 @@
-import { Component,  OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component,  OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { of } from 'rxjs/observable/of';
-import { GridComponent, RowClassArgs, CellClickEvent } from '@progress/kendo-angular-grid';
+import { GridComponent, RowClassArgs, CellClickEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 
 import { WorkOrderListService } from './workorderlist.service';
 import { IWorkOrderInfo } from './workorderinfo';
@@ -22,6 +22,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
     public workorderlist: IWorkOrderInfo[] = [];
     public errorMessage: string;
     @ViewChild('grid') grid: GridComponent;
+    @Input() focusQueue: string;
 
     constructor(workOrderListService: WorkOrderListService) {
         this._dataService = workOrderListService;
@@ -48,15 +49,13 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
     }
 
     onExpand(data, index) {
+        // HTML kendo-grid attribute:   (detailExpand)="onExpand($event.dataItem, $event.index)"
         alert('Expanding');
       }
 
-    public rowEventCallBack(context: RowClassArgs) {
-        // const isEven = context.index % 2 === 0;
-        // this.grid.expandRow(context.index);
-        // return {
-        // even: isEven,
-        //  odd: !isEven
+    public onRowSelected(selectionEvent: SelectionEvent) {
+        const selectedItem = this.grid.data[selectionEvent.index];
+        console.log ('WO# selected: ' + selectedItem.WorkOrderNumber);
     }
 
 }
