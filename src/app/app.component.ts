@@ -11,8 +11,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class AppComponent {
     public name: string;
 
-    onQueueSelectedItem (data: string): void {
-       console.log ('onQueueSelectedItem: ' + data);
-       this.name = data;
+    onQueueSelectedItem (nodeData: any): void {
+       console.log ('appComponent event "onQueueSelectedItem" received. Data: ' + JSON.stringify(nodeData));
+       this.name = nodeData.activeQueue;
     }
 }

@@ -4,5 +4,6 @@ export interface IQueue {
         ParentId: string;
         Count: number;
         UserId: number;
+        UserNetworkId: string;
         Children: IQueue[] ;
 }

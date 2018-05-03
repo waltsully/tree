@@ -5,18 +5,18 @@
             <span class="boxtext"> Queues</span>
         </div>
     </div>
-    <!-- Developemnt debugging...
+    <!-- Developemnt debugging... 
     <span class="debug" style="display:inline-block;">
             (debug) Nodes Selected: {{selectedKeys.join()}}
                     Expanded: {{expandedKeys.join(",")}}
                     <br>UserId: {{userId}}
                     <br>UserName: {{userName}}
     </span>
-     -->
+    -->
     <div #ktree class="treecontainer">
         <kendo-treeview style="font-size: inherit;"
             [nodes]="queues"
-            textField="Caption" 
+            textField="Caption"
             childrenField="Children"    
             [hasChildren]="hasChildren" 
             [children]="fetchChildren"        
@@ -24,7 +24,8 @@
             [kendoTreeViewSelectable]="{ mode: 'single' }"
             [(selectedKeys)]="selectedKeys"
             [(expandedKeys)]="expandedKeys"            
-            (selectionChange)="onSelect($event)"            
+            (selectionChange)="onSelectionChanged($event)" 
+            (selectedKeysChange)="onSelectedKeysChanged($event)"           
         >
         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                 <span [ngClass]="iconClass(dataItem)"></span>

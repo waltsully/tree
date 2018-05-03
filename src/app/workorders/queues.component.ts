@@ -1,8 +1,10 @@
-import { Component,  OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component,  OnInit, AfterViewInit, ViewEncapsulation, 
+         ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 
 import { QueuesService } from './queues.service';
 import { IQueue } from './queue';
+import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
 
@@ -16,16 +18,18 @@ const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileN
 })
 export class QueuesComponent implements OnInit, AfterViewInit {
 
-    @ViewChild('ktree') ktree: ElementRef;
-
     private _dataService;
-    public selectedKeys: any[] = ['0_2'];
-    public expandedKeys: any[] = ['0'];
+    public selectedKeys: any[] = ['5'];
+    public expandedKeys: any[] = ['5'];
     public userName: string;
     public userId: string;
+    public userNetworkId: string;
     public queues: IQueue[] = [];
     public errorMessage: string;
-    @Output() selectedNodeChanged: EventEmitter<string> = new EventEmitter<string>();
+
+    @ViewChild('ktree') ktree: TreeViewComponent;
+    @Output() selectedNodeChanged: EventEmitter<Object> = new EventEmitter<Object>();
+
     constructor(queuesService: QueuesService) {
         this._dataService = queuesService;
     }
@@ -34,29 +38,42 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     public fetchChildren = (item: IQueue) => of(item.Children);
 
     // we handle treeview navigation event here...
-    public onSelect({ index, dataItem }: any): void {
-        this.selectedKeys = [index];                      // debugging
-        this.userId = dataItem.UserId;                    // debugging
-        this.userName = dataItem.Caption;                 // debugging
-        this.selectedNodeChanged.emit(dataItem.Caption);  // propagate to parent container
+    public onSelectionChanged({ index, dataItem }: any): void {
+           const nodeSelected = {
+            userName: dataItem.Caption,
+            userNetworkId: 'wsully' // dataItem.UserNetworkID
+        };
+        console.log('queuesComponent onSelectionChanged emitting: ' + JSON.stringify(nodeSelected));
+        // propagate to parent container...
+        this.selectedNodeChanged.emit(nodeSelected);
     }
 
-    public iconClass(node: IQueue): any {
+    public onSelectedKeysChanged(newNode: any): void {
+        // console.log('Queue selection Keys changed to #: ' + this.selectedKeys);
+    }
+
+    public iconClass(node: IQueue): any {                           // we can add icons to each node
         // this detects those nodes that have children nodes
         if (node.Children.length) {
             return 'hit';
         }
     }
 
+    doSelectDefault(): void {
+        console.log('Queue selecting default node: ?' + this.selectedKeys);
+        // this.selectedNodeChanged.emit('Unassigned');
+    }
+
     ngOnInit(): void {
         console.log('On Init fired from queues component');
         this._dataService.getQueues()
-            .subscribe(queues =>
-                this.queues = queues,
+            .subscribe(queues => {
+                this.queues = queues;
+                this.doSelectDefault();          // now that data is loaded
+            },
                 ex => this.errorMessage = <any>ex);
     }
 
     ngAfterViewInit(): void {
-        // this.ktree.nativeElement.hide();
     }
 }

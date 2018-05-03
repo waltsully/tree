@@ -21,8 +21,20 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
     private _dataService;
     public workorderlist: IWorkOrderInfo[] = [];
     public errorMessage: string;
+    public queueInFocus: string;
     @ViewChild('grid') grid: GridComponent;
-    @Input() focusQueue: string;
+
+    // listen for Queue selection - an object is passed to us. Load our grid...
+    @Input() set focusQueue(value: any) {
+        this.queueInFocus = value.activeQueue;
+        console.log('workOrderListComponent: event "focusQueue" has occurred.' + JSON.stringify(value));
+        this._dataService.getWorkOrderList('wsully')
+        .subscribe(workorderlist => {
+            this.workorderlist = workorderlist;
+            this.expandAllRows();
+        },
+            ex => this.errorMessage = <any>ex);
+    }
 
     constructor(workOrderListService: WorkOrderListService) {
         this._dataService = workOrderListService;
@@ -30,12 +42,6 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         console.log('On Init fired from workorderlist component');
-        this._dataService.getWorkOrderList()
-            .subscribe(workorderlist => {
-                this.workorderlist = workorderlist;
-                this.expandAllRows();
-            },
-                ex => this.errorMessage = <any>ex);
     }
 
     ngAfterViewInit(): void {
@@ -48,8 +54,11 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
         }
     }
 
-    onExpand(data, index) {
-        // HTML kendo-grid attribute:   (detailExpand)="onExpand($event.dataItem, $event.index)"
+    public hideExpansionIndicator(context: RowClassArgs) {
+        console.log('Grid row#' + context.index);
+    }
+
+    public onExpand(data, index) {
         alert('Expanding');
       }
 
