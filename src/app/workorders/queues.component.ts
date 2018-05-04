@@ -8,6 +8,11 @@ import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
 
+interface NodeSelected {
+    userName: string;
+    userNetworkId: string;
+}
+
 @Component({
     // prevent style encapsulation is needed to "see" the kendo k- classes
     encapsulation: ViewEncapsulation.None,
@@ -16,11 +21,11 @@ const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileN
     styleUrls: ['queues.component.scss'],
     providers: [QueuesService]
 })
-export class QueuesComponent implements OnInit, AfterViewInit {
 
+export class QueuesComponent implements OnInit, AfterViewInit {
     private _dataService;
-    public selectedKeys: any[] = ['5'];
-    public expandedKeys: any[] = ['5'];
+    public selectedKeys: any[] = [4];
+    public expandedKeys: any[] = [4];
     public userName: string;
     public userId: string;
     public userNetworkId: string;
@@ -39,17 +44,18 @@ export class QueuesComponent implements OnInit, AfterViewInit {
 
     // we handle treeview navigation event here...
     public onSelectionChanged({ index, dataItem }: any): void {
-           const nodeSelected = {
-            userName: dataItem.Caption,
-            userNetworkId: 'wsully' // dataItem.UserNetworkID
-        };
-        console.log('queuesComponent onSelectionChanged emitting: ' + JSON.stringify(nodeSelected));
+        const payload = <NodeSelected>{};
+        console.log('QueuesComponent:onSelectionChanged dataItem: ' + JSON.stringify(dataItem));
+        payload.userName = dataItem.Caption;
+        payload.userNetworkId = dataItem.UserNetworkId;
+        console.log('queuesComponent onSelectionChanged emitting: ' + JSON.stringify(payload));
         // propagate to parent container...
-        this.selectedNodeChanged.emit(nodeSelected);
+        this.selectedNodeChanged.emit(payload);
     }
 
-    public onSelectedKeysChanged(newNode: any): void {
-        // console.log('Queue selection Keys changed to #: ' + this.selectedKeys);
+    public onSelectedKeysChanged(value: any): void {
+        console.log('Queue selection Keys changed to #: ' + this.selectedKeys);
+        console.log('value: ' + JSON.stringify(value));
     }
 
     public iconClass(node: IQueue): any {                           // we can add icons to each node
@@ -60,12 +66,13 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     }
 
     doSelectDefault(): void {
-        console.log('Queue selecting default node: ?' + this.selectedKeys);
-        // this.selectedNodeChanged.emit('Unassigned');
+        console.log('Queue selecting default node: ?' ); // ??? this.selectedKeys);
+        this.selectedKeys = [4];
+        this.selectedNodeChanged.emit({});
     }
 
     ngOnInit(): void {
-        console.log('On Init fired from queues component');
+        console.log('On Init fired from Queues component');
         this._dataService.getQueues()
             .subscribe(queues => {
                 this.queues = queues;

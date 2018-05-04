@@ -11,15 +11,12 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { AppComponent } from './app.component';
 import { QueuesComponent } from './workorders/queues.component';
 import { WorkOrderListComponent } from './workorders/workorderlist.component';
-import { CounterComponent } from './workorders/counter.component';
-
 
 @NgModule({
     declarations: [
         AppComponent,
         QueuesComponent,
-        WorkOrderListComponent,
-        CounterComponent
+        WorkOrderListComponent
     ],
     imports: [
         BrowserModule,

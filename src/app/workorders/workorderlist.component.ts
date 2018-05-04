@@ -26,8 +26,8 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
 
     // listen for Queue selection - an object is passed to us. Load our grid...
     @Input() set focusQueue(value: any) {
-        this.queueInFocus = value.activeQueue;
-        console.log('workOrderListComponent: event "focusQueue" has occurred.' + JSON.stringify(value));
+        this.queueInFocus = value;
+        console.log('WorkOrderListComponent: event "focusQueue" has occurred ' + JSON.stringify(value));
         this._dataService.getWorkOrderList('wsully')
         .subscribe(workorderlist => {
             this.workorderlist = workorderlist;
@@ -41,7 +41,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        console.log('On Init fired from workorderlist component');
+        console.log('On Init fired from WorkOrderList component');
     }
 
     ngAfterViewInit(): void {
@@ -59,7 +59,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit {
     }
 
     public onExpand(data, index) {
-        alert('Expanding');
+        console.log('WorkOrderList: Expand Event!');
       }
 
     public onRowSelected(selectionEvent: SelectionEvent) {

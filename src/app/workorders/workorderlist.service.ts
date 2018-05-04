@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -17,7 +17,7 @@ export class WorkOrderListService {
 
     public getWorkOrderList(userName: string): Observable<IWorkOrderInfo[]> {
         return this._http.get<IWorkOrderInfo[]>(this._devworkorderlistUrl + userName)
-        .do (data => console.log('WorkOrderListService returning data for: ' + userName))      // JSON.stringify(data) 
+        .do (data => console.log('WorkOrderListService:getWorkOrderList returning data for: ' + userName))      // JSON.stringify(data) 
         .catch(this.errorHandler);
     }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -16,9 +16,9 @@ export class QueuesService {
 
     constructor(private _http: HttpClient) { }
 
-    public getQueues(): Observable<IQueue[]> {
-        return this._http.get<IQueue[]>(this._devqueuesUrl)
-        .do (data => console.log('get Queues returning data: ' + JSON.stringify(data)))
+    public getQueues(): Observable<any> {
+        return this._http.get(this._devqueuesUrl)
+        .do (data => console.log('QueueServices:getQueues returning data: ' + JSON.stringify(data)))
         .catch(this.errorHandler);
     }
 
