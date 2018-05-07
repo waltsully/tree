@@ -9,16 +9,17 @@
     <div #ktree class="treecontainer">
         <kendo-treeview style="font-size: inherit;"
             [nodes]="queues"
-            textField="Caption"
-            childrenField="Children"    
+            textField="Caption"          
             [hasChildren]="hasChildren" 
-            [children]="fetchChildren"        
-            kendoTreeViewExpandable          
-            [kendoTreeViewSelectable]="{ mode: 'single' }"
-            [(selectedKeys)]="selectedKeys"
+            [children]="fetchChildren"
+            kendoTreeViewExpandable
+            [expandBy]="'Caption'"
             [(expandedKeys)]="expandedKeys"            
-            (selectionChange)="onSelectionChanged($event)" 
-            (selectedKeysChange)="onSelectedKeysChanged($event)"           
+            kendoTreeViewSelectable
+            [selectBy]="'Caption'"
+            [(selectedKeys)]="selectedKeys"
+            kendoTreeViewExpandable    
+            (selectionChange)="onSelectionChanged($event)"             
         >
         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                 <span [ngClass]="iconClass(dataItem)"></span>

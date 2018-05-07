@@ -2,19 +2,12 @@
 
 <div class= "appframe">
   <div class="leftpanel">
-    <app-queues (selectedNodeChanged)='onQueueSelectedItem($event)'></app-queues>
+    <app-queues (selectedQueue)='onSelectedQueueChanged($event)'></app-queues>
   </div>   
   <div class="middlepanel">
-    <app-workorderlist [focusQueue]='nodeData'></app-workorderlist>
+    <app-workorderlist [focusQueue]='workOrderFocus' [networkId]='networkId'></app-workorderlist>
   </div>
   <div class="rightpanel">
     detail component will go here
   </div>
 </div>
-
-
-  <!-- Set-up to listen for events from children components -->
-  <div class="test">
-    <!-- testing of angular events -->
-
-  </div>

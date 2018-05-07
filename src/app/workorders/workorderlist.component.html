@@ -2,7 +2,7 @@
 <div class="workOrderList">
     <div class="boxtitle">
         <div class="innerborder">
-            <span class="boxtext">Work Orders - {{queueInFocus}}</span>
+            <span class="boxtext">Work Orders - {{focusQueue}}</span>
         </div>
     </div>
     <kendo-grid #grid 
@@ -13,9 +13,9 @@
         style="font-size: inherit;">
             <kendo-grid-column field="alert" title="*" width="10"></kendo-grid-column>
             <kendo-grid-column field="flag" title="*" width="10"></kendo-grid-column>
-            <kendo-grid-column field="attachment" title="*" width="10"></kendo-grid-column>
+            <kendo-grid-column field="WorkOrderType" title="*" width="10"></kendo-grid-column>
             <kendo-grid-column field="WorkOrderNumber" title="WO#" width="40"></kendo-grid-column>
-            <kendo-grid-column field="UserName" title="Assigned To" width="40"></kendo-grid-column> 
+            <kendo-grid-column field="UserFullName" title="Assigned To" width="40"></kendo-grid-column> 
             <kendo-grid-column field="DateDue" title="Due Date" width="30">
                 <ng-template kendoGridCellTemplate let-dataItem>
                    {{dataItem.DateDue | date:'shortDate'}}

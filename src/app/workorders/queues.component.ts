@@ -8,7 +8,7 @@ import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
 
-interface NodeSelected {
+export interface IQueueInFocus {
     userName: string;
     userNetworkId: string;
 }
@@ -24,38 +24,32 @@ interface NodeSelected {
 
 export class QueuesComponent implements OnInit, AfterViewInit {
     private _dataService;
-    public selectedKeys: any[] = [4];
-    public expandedKeys: any[] = [4];
-    public userName: string;
-    public userId: string;
-    public userNetworkId: string;
     public queues: IQueue[] = [];
+    private queueInFocus = <IQueueInFocus>{};
     public errorMessage: string;
 
     @ViewChild('ktree') ktree: TreeViewComponent;
-    @Output() selectedNodeChanged: EventEmitter<Object> = new EventEmitter<Object>();
+    @Output() selectedQueue: EventEmitter<IQueueInFocus> = new EventEmitter<IQueueInFocus>();
 
     constructor(queuesService: QueuesService) {
         this._dataService = queuesService;
     }
-
-    public hasChildren = (item: IQueue) => item.Children && item.Children.length > 0;
-    public fetchChildren = (item: IQueue) => of(item.Children);
+    public expandedKeys: string[] = ['Assigned Users'];
+    public selectedKeys: string[] = ['Daryl Chance'];
+    public hasChildren = (item: any) => item.Children && item.Children.length > 0;
+    public fetchChildren = (item: any) => of(item.Children);
 
     // we handle treeview navigation event here...
-    public onSelectionChanged({ index, dataItem }: any): void {
-        const payload = <NodeSelected>{};
-        console.log('QueuesComponent:onSelectionChanged dataItem: ' + JSON.stringify(dataItem));
-        payload.userName = dataItem.Caption;
-        payload.userNetworkId = dataItem.UserNetworkId;
-        console.log('queuesComponent onSelectionChanged emitting: ' + JSON.stringify(payload));
-        // propagate to parent container...
-        this.selectedNodeChanged.emit(payload);
-    }
+    public onSelectionChanged({index, dataItem}: any): void {
+        console.log('Queues component:onSelectionChanged: index=' + index);
+        // NOTE: dataItem will contain all the children nodes for a click on top-level node
+        // console.log('Queues component:onSelectionChanged: dataItem=' + JSON.stringify(dataItem));
+        this.queueInFocus.userName = dataItem.Caption;
+        this.queueInFocus.userNetworkId = dataItem.UserNetworkId;
 
-    public onSelectedKeysChanged(value: any): void {
-        console.log('Queue selection Keys changed to #: ' + this.selectedKeys);
-        console.log('value: ' + JSON.stringify(value));
+        // console.log('Queues component:onSelectionChanged emitting: ' + JSON.stringify(this.queueInFocus));
+        // propagate to parent container...
+        this.selectedQueue.emit(this.queueInFocus);
     }
 
     public iconClass(node: IQueue): any {                           // we can add icons to each node
@@ -66,21 +60,24 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     }
 
     doSelectDefault(): void {
-        console.log('Queue selecting default node: ?' ); // ??? this.selectedKeys);
-        this.selectedKeys = [4];
-        this.selectedNodeChanged.emit({});
+        this.queueInFocus.userName = 'Daryl Chance';
+        this.queueInFocus.userNetworkId = 'dchance';
+        console.log('Queues: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));
+        this.selectedQueue.emit(this.queueInFocus);
     }
 
     ngOnInit(): void {
-        console.log('On Init fired from Queues component');
+        console.log('Queues: ngOnInit fired. Waiting for data...');
         this._dataService.getQueues()
             .subscribe(queues => {
                 this.queues = queues;
-                this.doSelectDefault();          // now that data is loaded
+                // console.log('Queues: service returned data=' + JSON.stringify(this.queues));
+                // this.doSelectDefault();
             },
                 ex => this.errorMessage = <any>ex);
     }
 
     ngAfterViewInit(): void {
+        console.log('Queues: ngAfterViewInit fired.');
     }
 }
