@@ -1,0 +1,29 @@
+<div class="error">{{errorMessage}}</div>
+<div class="workOrderList">
+    <div class="boxtitle">
+        <div class="innerborder">
+            <span class="boxtext">WO# {{selectedWorkOrder}} Notes</span>
+        </div>
+    </div>
+    <kendo-grid #notesgrid 
+        [data]="workordernotes" 
+        [selectable]="true"
+        (selectionChange)="onRowSelected($event)"  
+        (rowClass)="hideExpansionIndicator"     
+        style="font-size: inherit;">
+
+        <kendo-grid-column field="DateDue" title="Input Date Time" width="40">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.DateEntered | date:'shortDate'}}
+                </ng-template>
+        </kendo-grid-column>        
+        <kendo-grid-column field="WorkOrderNumber" title="WO#" width="40"></kendo-grid-column>
+        <kendo-grid-column field="EnteredBy" title="Enetered By" width="40"></kendo-grid-column> 
+        
+        <ng-template kendoGridDetailTemplate let-dataItem>
+        <section *ngIf="dataItem.Detail">
+            Description: {{dataItem.Detail.Notes}}                 
+        </section>
+        </ng-template>
+    </kendo-grid>      
+</div>

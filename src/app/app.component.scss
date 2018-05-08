@@ -1,4 +1,3 @@
-
 .appframe {
     background-color: white;
     color: #344f75;
@@ -7,30 +6,30 @@
     flex-direction: row;            
     flex-wrap: nowrap;              
     justify-content: space-between; 
-    font-size: 8pt;
-    width: 1000px;
+   // font-size: 8pt;
+    border: 0px dashed black;
+    width: 1100px;
     height:550px;
 }
 
-.appframe > div {    
-    border: 1px solid #4a6e9e;
-    font-size: 8pt;
-}
+// .appframe > div {    
+//     border: 1px solid #4a6e9e;
+//     font-size: 8pt;
+// }
 
 .leftpanel {
-    width: 350px;
-    border: 0px solid white;
+    width: 230px;
+    border: 10px solid purple;
 }
 
 .middlepanel {
-    width:800px;
-    border: 0px solid white;
+    width:400px;
+    border: 10px solid red;
 }
 
 .rightpanel {
-    width: 400px;
-    background-color: wheat;
-    border: 0px solid white;
+    width: 470px;    
+    border: 10px solid green;
 }
 
 

@@ -19,7 +19,7 @@
             [selectBy]="'Caption'"
             [(selectedKeys)]="selectedKeys"
             kendoTreeViewExpandable    
-            (selectionChange)="onSelectionChanged($event)"             
+            (selectionChange)="onRowSelected($event)"             
         >
         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                 <span [ngClass]="iconClass(dataItem)"></span>

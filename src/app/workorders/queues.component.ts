@@ -8,7 +8,7 @@ import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
 
-export interface IQueueInFocus {
+export interface IQueueFocus {
     userName: string;
     userNetworkId: string;
 }
@@ -25,11 +25,11 @@ export interface IQueueInFocus {
 export class QueuesComponent implements OnInit, AfterViewInit {
     private _dataService;
     public queues: IQueue[] = [];
-    private queueInFocus = <IQueueInFocus>{};
+    private queueInFocus = <IQueueFocus>{};
     public errorMessage: string;
 
     @ViewChild('ktree') ktree: TreeViewComponent;
-    @Output() selectedQueue: EventEmitter<IQueueInFocus> = new EventEmitter<IQueueInFocus>();
+    @Output() selectedQueue: EventEmitter<IQueueFocus> = new EventEmitter<IQueueFocus>();
 
     constructor(queuesService: QueuesService) {
         this._dataService = queuesService;
@@ -40,8 +40,8 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     public fetchChildren = (item: any) => of(item.Children);
 
     // we handle treeview navigation event here...
-    public onSelectionChanged({index, dataItem}: any): void {
-        console.log('Queues component:onSelectionChanged: index=' + index);
+    public onRowSelected({index, dataItem}: any): void {
+        console.log('QueuesComponent:onSelectionChanged: index=' + index + 'dataItem: ' + JSON.stringify(dataItem));
         // NOTE: dataItem will contain all the children nodes for a click on top-level node
         // console.log('Queues component:onSelectionChanged: dataItem=' + JSON.stringify(dataItem));
         this.queueInFocus.userName = dataItem.Caption;

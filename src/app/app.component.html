@@ -2,12 +2,19 @@
 
 <div class= "appframe">
   <div class="leftpanel">
-    <app-queues (selectedQueue)='onSelectedQueueChanged($event)'></app-queues>
+    <app-queues (selectedQueue)='onSelectedQueueChanged($event)'>
+
+    </app-queues>
   </div>   
   <div class="middlepanel">
-    <app-workorderlist [focusQueue]='workOrderFocus' [networkId]='networkId'></app-workorderlist>
+    <app-workorderlist [selectedQueue]='selectedQueue'
+                       [userNetworkId]='userNetworkId'
+                       (selectedWorkOrder)='onSelectedWorkOrderChanged'>
+    </app-workorderlist>
   </div>
   <div class="rightpanel">
-    detail component will go here
+    <app-workordernotes [selectedWorkOrder]='selectedWorkOrder'
+                        [userNetworkId]='networkId'>
+    </app-workordernotes>
   </div>
 </div>

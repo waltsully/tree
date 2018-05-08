@@ -9,21 +9,21 @@ import { IWorkOrderInfo } from './workorderinfo';
 import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
-export class WorkOrderListService {
+export class WorkOrderNotesService {
     private _devworkorderlistUrl = 'http://localhost:55299/api/workorder/GetListByQueueAndUser/';
     private _workorderlistUrl = 'https://qa-workorders.e-ins.net/api/workorder/GetListByQueueAndUser/';
 
     constructor(private _http: HttpClient) { }
 
-    public getWorkOrderList(userName: string): Observable<any> {
-        console.log('WorkOrderListService: getWorkOrderList for: ' + userName);
-        return this._http.get(this._devworkorderlistUrl + userName)
-            .do (data => console.log('WorkOrderListService:getWorkOrderList returning data for: ' + userName + ':' + JSON.stringify(data)))
-            .catch(this.errorHandler);
+    public getWorkOrderNotes(workOrderNumber: string): Observable<any> {
+        console.log('WorkOrderNoteService: getWorkOrderList for: ' + workOrderNumber);
+        return this._http.get(this._devworkorderlistUrl + workOrderNumber)
+        .do (data => console.log('WorkOrderNotesService:getWorkOrderNotes:WO#' + workOrderNumber + ': ' + JSON.stringify(data)))
+        .catch(this.errorHandler);
     }
 
     private errorHandler(ex: HttpErrorResponse) {
-        console.log('WorkOrderListService ERROR: ' + ex.message);
+        console.log('WorkOrderNotesService.ts ERROR: ' + ex.message);
         return Observable.throw(ex);
     }
 }

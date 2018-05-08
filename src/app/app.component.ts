@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges,
          ViewEncapsulation } from '@angular/core';
-import { IQueueInFocus } from './workorders/queues.component';
+import { IQueueFocus } from './workorders/queues.component';
+import { IWorkOrderFocus } from './workorders/workorderlist.component';
 
 @Component({
     // prevent style encapsulation
@@ -12,21 +13,27 @@ import { IQueueInFocus } from './workorders/queues.component';
 })
 
 export class AppComponent implements OnInit, AfterViewInit, OnChanges {
-     @Input() selectedQueue = <IQueueInFocus>{};
-     workOrderFocus: string;
-     networkId: string;
 
-    onSelectedQueueChanged($event: IQueueInFocus) {
-        console.log ('App component received event "selectedQueueChanged" ' + JSON.stringify($event));
-        this.workOrderFocus = $event.userName;
-        this.networkId = $event.userNetworkId;
+     public selectedQueue: string;
+     public userNetworkId: string;
+     public selectedWorkOrder: string;
+
+
+    onSelectedQueueChanged($event: any) {
+        console.log ('AppComponent: onSelectedQueueChanged: ' + JSON.stringify($event));
+        this.userNetworkId = $event.userNetworkId;
+        this.selectedQueue = $event.userName;
+        console.log ('AppComponent: set public vars: ' + this.selectedQueue + ',' + this.userNetworkId);
+    }
+
+    onSelectedWorkOrderChanged($event: any) {
+        console.log ('App component received event "onSelectedWorkOrderChanged" ' + JSON.stringify($event));
+        this.selectedWorkOrder = $event.WorkOrderNumber;
+        this.userNetworkId = $event.UserNetworkId;
     }
 
     ngOnInit(): void {
-        console.log('App component: ngOnInit fired. Seeding "workOrderFocus"');
-        this.selectedQueue.userName = 'Walt Sully';
-        this.selectedQueue.userNetworkId = 'wsully';
-        this.workOrderFocus = this.selectedQueue.userName;
+        console.log('App component: ngOnInit fired.');
      }
 
     ngAfterViewInit(): void {
