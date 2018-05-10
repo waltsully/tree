@@ -1,5 +1,5 @@
 import { Component,  OnInit, AfterViewInit, OnChanges,
-  ViewEncapsulation,   ViewChild, ElementRef, Input } from '@angular/core';
+         ViewEncapsulation,   ViewChild, ElementRef, Input, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { of } from 'rxjs/observable/of';
 import { GridComponent, RowClassArgs, CellClickEvent, SelectionEvent } from '@progress/kendo-angular-grid';
@@ -14,42 +14,44 @@ import { IWorkOrderInfo } from './workorderinfo';
   providers: [WorkOrderNotesService]
 })
 export class WorkOrderNotesComponent implements OnInit, OnChanges {
+  @ViewChild('notesgrid') notesGrid: GridComponent;
+  @Input() userNetworkId: string;
+  @Input() selectedWorkOrder: string;
 
   private _dataService;
   public workordernotes = [];
+  public workOrderNumber: string;
   public errorMessage: string;
-
-  @ViewChild('notesgrid') notesGrid: GridComponent;
-  @Input() selectedWorkOrder: string;
-  @Input() userNetworkId: string;
 
   constructor(workOrderNotesService: WorkOrderNotesService) {
     this._dataService = workOrderNotesService;
   }
 
-    ngOnInit(): void {
-      console.log('WorkOrderNotes: ngOnInit fired with workOrderNumber= ' + this.selectedWorkOrder);
-    }
+  public onRowSelected({index, dataItem}) {
 
-    ngOnChanges(): void {
-      console.log('WorkOrderNotes: ngOnChanges fired with workOrderNumber= ' + this.selectedWorkOrder + ' id=' + this.userNetworkId);
-     // if (this.networkId = 'NA') { return; }
-      // this._dataService.getWorkOrderList(this.focusWorkOrder)
-      //     .subscribe(workordernotes => {
-      //         this.workordernotes = workordernotes;
-      //         this.expandAllRows();
-      // },
-      //     ex => this.errorMessage = <any>ex);
-    }
+}
 
-    private expandAllRows() {
-      for (let i = 0; i < this.workordernotes.length; i++) {
-          this.notesGrid.expandRow(i);
-      }
+  private expandAllRows() {
+    for (let i = 0; i < this.workordernotes.length; i++) {
+        this.notesGrid.expandRow(i);
     }
-
-    public onRowSelected({index, dataItem}) {
-      const selectedItem = this.notesGrid.data[index];
-      console.log ('workOrderNotes: selected index= ' + index); // + dataItem.WorkOrderNumber);
   }
+  ngOnInit(): void {
+    console.log('WorkOrderNotes: ngOnInit: fired ');
+  }
+
+  ngOnChanges(): void {
+    console.log('WorkOrderNotes: ngOnChanges: selectedWorkOrder: ' + this.selectedWorkOrder + ' id=' + this.userNetworkId);
+    // if (this.networkId = 'NA') { return; }
+    // this._dataService.getWorkOrderList(this.focusWorkOrder)
+    //     .subscribe(workordernotes => {
+    //         this.workordernotes = workordernotes;
+    //         this.expandAllRows();
+    // },
+    //     ex => this.errorMessage = <any>ex);
+  }
+
+
+
+
 }

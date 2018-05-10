@@ -13,34 +13,33 @@ import { IWorkOrderFocus } from './workorders/workorderlist.component';
 })
 
 export class AppComponent implements OnInit, AfterViewInit, OnChanges {
-
-     public selectedQueue: string;
-     public userNetworkId: string;
-     public selectedWorkOrder: string;
-
+    @Input() selectedQueue: string;
+    @Input() userNetworkId: string;
+    @Input() selectedWorkOrder: string;
 
     onSelectedQueueChanged($event: any) {
-        console.log ('AppComponent: onSelectedQueueChanged: ' + JSON.stringify($event));
-        this.userNetworkId = $event.userNetworkId;
-        this.selectedQueue = $event.userName;
-        console.log ('AppComponent: set public vars: ' + this.selectedQueue + ',' + this.userNetworkId);
+       console.log ('AppComponent: onSelectedQueueChanged: ' + JSON.stringify($event));
+       this.userNetworkId = $event.userNetworkId;
+       this.selectedQueue = $event.userName;
+       console.log ('AppComponent: set Queue bindings: ' + this.selectedQueue + ',' + this.userNetworkId);
     }
 
     onSelectedWorkOrderChanged($event: any) {
-        console.log ('App component received event "onSelectedWorkOrderChanged" ' + JSON.stringify($event));
-        this.selectedWorkOrder = $event.WorkOrderNumber;
-        this.userNetworkId = $event.UserNetworkId;
+        console.log ('AppComponent: onSelectedWorkOrderChanged: ' + JSON.stringify($event));
+        // this.userNetworkId = $event.UserNetworkId;
+        this.selectedWorkOrder = $event.workOrderNumber;
+        console.log ('AppComponent: set WorkOrder bindings: ' + this.selectedWorkOrder + ',' + this.userNetworkId);
     }
 
     ngOnInit(): void {
-        console.log('App component: ngOnInit fired.');
+        console.log('AppComponent: ngOnInit fired.');
      }
 
     ngAfterViewInit(): void {
-        console.log('App component: ngAfterViewInit fired');
+        console.log('AppComponent: ngAfterViewInit fired');
     }
 
     ngOnChanges(): void {
-        console.log('App component: ngOnChanges fired');
+        console.log('AppComponent: ngOnChanges fired');
     }
 }

@@ -23,23 +23,39 @@ export interface IQueueFocus {
 })
 
 export class QueuesComponent implements OnInit, AfterViewInit {
+    @ViewChild('ktree') ktree: TreeViewComponent;
+    @Output() selectedQueue: EventEmitter<IQueueFocus> = new EventEmitter<IQueueFocus>( );
+
     private _dataService;
     public queues: IQueue[] = [];
     private queueInFocus = <IQueueFocus>{};
     public errorMessage: string;
-
-    @ViewChild('ktree') ktree: TreeViewComponent;
-    @Output() selectedQueue: EventEmitter<IQueueFocus> = new EventEmitter<IQueueFocus>();
+    public expandedKeys: string[] = ['Assigned Users'];
+    public selectedKeys: string[] = ['Walter Sully'];
+    public hasChildren = (item: any) => item.Children && item.Children.length > 0;
+    public fetchChildren = (item: any) => of(item.Children);
 
     constructor(queuesService: QueuesService) {
         this._dataService = queuesService;
     }
-    public expandedKeys: string[] = ['Assigned Users'];
-    public selectedKeys: string[] = ['Daryl Chance'];
-    public hasChildren = (item: any) => item.Children && item.Children.length > 0;
-    public fetchChildren = (item: any) => of(item.Children);
+
+    ngOnInit(): void {
+        console.log('Queues: ngOnInit fired. Waiting for data...');
+        this._dataService.getQueues()
+            .subscribe(queues => {
+                this.queues = queues;
+                // console.log('Queues: service returned data=' + JSON.stringify(this.queues));
+                this.doSelectDefault();
+            },
+                ex => this.errorMessage = <any>ex);
+    }
+
+    ngAfterViewInit(): void {
+        console.log('Queues: ngAfterViewInit fired.');
+    }
 
     // we handle treeview navigation event here...
+
     public onRowSelected({index, dataItem}: any): void {
         console.log('QueuesComponent:onSelectionChanged: index=' + index + 'dataItem: ' + JSON.stringify(dataItem));
         // NOTE: dataItem will contain all the children nodes for a click on top-level node
@@ -60,24 +76,9 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     }
 
     doSelectDefault(): void {
-        this.queueInFocus.userName = 'Daryl Chance';
-        this.queueInFocus.userNetworkId = 'dchance';
+        this.queueInFocus.userName = 'Walter Sully';
+        this.queueInFocus.userNetworkId = 'wsully';
         console.log('Queues: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));
         this.selectedQueue.emit(this.queueInFocus);
-    }
-
-    ngOnInit(): void {
-        console.log('Queues: ngOnInit fired. Waiting for data...');
-        this._dataService.getQueues()
-            .subscribe(queues => {
-                this.queues = queues;
-                // console.log('Queues: service returned data=' + JSON.stringify(this.queues));
-                // this.doSelectDefault();
-            },
-                ex => this.errorMessage = <any>ex);
-    }
-
-    ngAfterViewInit(): void {
-        console.log('Queues: ngAfterViewInit fired.');
     }
 }

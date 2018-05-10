@@ -18,7 +18,7 @@ export class QueuesService {
 
     public getQueues(): Observable<any> {
         return this._http.get(this._devqueuesUrl)
-        .do (data => console.log('QueueServices:getQueues returning data: ' + JSON.stringify(data)))
+        .do (data => console.log('QueueServices:getQueues returning data ')) // + JSON.stringify(data)))
         .catch(this.errorHandler);
     }
 

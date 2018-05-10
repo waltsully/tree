@@ -24,56 +24,55 @@ export interface IWorkOrderFocus {
     providers: [WorkOrderListService]
 })
 export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges {
-
-    private _dataService;
-    public workorderlist = [];
-    public errorMessage: string;
-    public foo = 'foo';
-
     @ViewChild('listgrid') listGrid: GridComponent;
-
-    // fouceQueue is databound from parent container...
-    // LESSON LEARNED: ngChanges was firing only once despite the data binding on an IQueueInFocus Object .userName property,
-    // which was getting properly updated and displayed in the view. What happens is passing of ng objects is by reference.
-    // Of course, the ref is passed just once causing a one-time firing of ngOnChanges when the app started up.
-    // My inital approach was an IQueueInFocus object containing two string properties "name" & "networkId"
-    // the soulution was to just created two @Input strings which do fire ngChanges when updated by parent component.
-
     @Input() selectedQueue: string;      // displayed in our View & it is databound to parent html [data]
     @Input() userNetworkId: string;      // used to fetch new grid data
-    @Output() selectedWorkOrder: EventEmitter<string> = new EventEmitter<string>();
+    @Output() selectedWorkOrder: EventEmitter<IWorkOrderFocus> = new EventEmitter<IWorkOrderFocus>();
+
+    private _dataService;
+    private _workOrderInFocus = <IWorkOrderFocus>{};
+    public workorderlist = [];
+    public errorMessage: string;
 
     constructor(workOrderListService: WorkOrderListService) {
         this._dataService = workOrderListService;
     }
 
     ngOnInit(): void {
-        console.log('WorkOrderList: ngOnInit fired: selecting ' + this.selectedQueue + ' id=' + this.userNetworkId);
-        // this.selectedWorkOrder.emit();
+        console.log('WorkOrderListComponent: ngOnInit fired: selecting ' + this.selectedQueue + ' id=' + this.userNetworkId);
     }
 
     ngAfterViewInit(): void {
-        console.log('WorkOrderList: ngAfterViewInit fired');
+        console.log('WorkOrderListComponent: ngAfterViewInit fired');
     }
 
     ngOnChanges() {
-        console.log('WorkOrderList: ngOnChanges fired selecting ' + this.selectedQueue + ' id=' + this.userNetworkId);
-       // if (this.networkId = 'NA') { return; }
-        this._dataService.getWorkOrderList(this.userNetworkId)
-            .subscribe(workorderlist => {
-                this.workorderlist = workorderlist;
-                this.expandAllRows();
-                // this.selectedWorkOrder = this.listGrid.data[1].WorkOrderNumber;
-        },
-            ex => this.errorMessage = <any>ex);
-
+        console.log('WorkOrderListComponent: ngOnChanges: selectedQueue: ' + this.selectedQueue + ' id=' + this.userNetworkId);
+        if (this.selectedQueue) {
+         // if queue is defined it means it changed and we need to load a new set of workorders...
+            this._dataService.getWorkOrderList(this.userNetworkId)
+                .subscribe(workorderlist => {
+                    this.workorderlist = workorderlist;
+                    console.log('WorkOrderListComponent: defualt is 1st row: ' + JSON.stringify(this.workorderlist[0].WorkOrderNumber));
+                    this._workOrderInFocus.workOrderNumber = this.workorderlist[0].WorkOrderNumber;
+                    this._workOrderInFocus.userNetworkId = this.workorderlist[0].UserNetworkId;
+                    this.expandAllRows();
+                    if ((workorderlist.length === 1) && (parseInt(workorderlist[0].WorkOrderNumber, 10) === -1)) {
+                        console.log('WorkOrderListComponent: dummy (empty) workorder received - empty the list...');
+                        this.workorderlist = [];
+                        }
+                    this.selectedWorkOrder.emit(this._workOrderInFocus);
+                },
+                    ex => this.errorMessage = <any>ex);
+            }
     }
 
-    public onRowSelected({index, dataItem}: any): void {
-        const selectedItem = this.listGrid.data[index];
-        console.log ('WorkOrderList:onRowSelected: ' + JSON.stringify(dataItem));
-        console.log ('WorkOrderList: WO# selected: ' + dataItem.WorkOrderNumber + ' id:' + dataItem.UserNetworkId);
-        this.selectedWorkOrder.emit(dataItem.WorkOrderNumber);
+    public onRowSelected($event): void {
+        // const selectedItem = this.listGrid.data[index];
+        console.log ('WorkOrderListComponent: onRowSelected: ' + JSON.stringify(this.workorderlist[$event.index]));
+        this._workOrderInFocus.workOrderNumber = this.workorderlist[$event.index].WorkOrderNumber;
+        this._workOrderInFocus.userNetworkId = this.workorderlist[$event.index].UserNetworkId;
+        this.selectedWorkOrder.emit(this._workOrderInFocus);
     }
 
     private expandAllRows() {
@@ -83,11 +82,11 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     }
 
     public hideExpansionIndicator(context: RowClassArgs) {
-        console.log('WorkOrderList:hideExpansionIndicator row#' + context.index);
+        console.log('WorkOrderListComponent: hideExpansionIndicator for row#' + context.index);
     }
 
     public onExpand(data, index) {
-        console.log('WorkOrderList: Expand Event!');
+        console.log('WorkOrderListComponent: onExpand');
       }
 
 

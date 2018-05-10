@@ -6,15 +6,15 @@
 
     </app-queues>
   </div>   
-  <div class="middlepanel">
+  <div class="middlepanel">    
     <app-workorderlist [selectedQueue]='selectedQueue'
                        [userNetworkId]='userNetworkId'
-                       (selectedWorkOrder)='onSelectedWorkOrderChanged'>
+                       (selectedWorkOrder)='onSelectedWorkOrderChanged($event)'>
     </app-workorderlist>
   </div>
   <div class="rightpanel">
     <app-workordernotes [selectedWorkOrder]='selectedWorkOrder'
-                        [userNetworkId]='networkId'>
+                        [userNetworkId]='userNetworkId'>
     </app-workordernotes>
   </div>
 </div>

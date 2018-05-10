@@ -15,10 +15,9 @@ export class WorkOrderListService {
 
     constructor(private _http: HttpClient) { }
 
-    public getWorkOrderList(userName: string): Observable<any> {
-        console.log('WorkOrderListService: getWorkOrderList for: ' + userName);
-        return this._http.get(this._devworkorderlistUrl + userName)
-            .do (data => console.log('WorkOrderListService:getWorkOrderList returning data for: ' + userName + ':' + JSON.stringify(data)))
+    public getWorkOrderList(userNetworkId: string): Observable<any> {
+        return this._http.get(this._devworkorderlistUrl + userNetworkId)
+            .do (data => console.log('WorkOrderListService:getWorkOrderList returning data for: ' + userNetworkId))
             .catch(this.errorHandler);
     }
 

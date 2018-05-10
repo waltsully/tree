@@ -12,8 +12,8 @@
         (rowClass)="hideExpansionIndicator"     
         style="font-size: inherit;">
 
-        <kendo-grid-column field="alert" title="*" width="10"></kendo-grid-column>
-        <kendo-grid-column field="flag" title="*" width="10"></kendo-grid-column>
+        <kendo-grid-column field="WorkOrderType" title="*" width="10"></kendo-grid-column>
+        <kendo-grid-column field="WorkOrderType" title="*" width="10"></kendo-grid-column>
         <kendo-grid-column field="WorkOrderType" title="*" width="10"></kendo-grid-column>
         <kendo-grid-column field="WorkOrderNumber" title="WO#" width="40"></kendo-grid-column>
         <kendo-grid-column field="UserFullName" title="Assigned To" width="40"></kendo-grid-column> 
@@ -25,8 +25,12 @@
 
         <ng-template kendoGridDetailTemplate let-dataItem>
         <section *ngIf="dataItem.Detail">
-            Description: {{dataItem.Detail.Description}}                 
+            {{dataItem.Detail.Description}}                 
         </section>
+        </ng-template>
+
+        <ng-template kendoGridNoRecordsTemplate>
+                There are are no items to show in this queue.
         </ng-template>
     </kendo-grid>      
 </div>
