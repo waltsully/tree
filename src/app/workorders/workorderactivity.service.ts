@@ -9,21 +9,21 @@ import { IWorkOrderInfo } from './workorderinfo';
 import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
-export class WorkOrderNotesService {
-    private _devworkorderlistUrl = 'http://localhost:55299/api/workorder/GetListByQueueAndUser/';
-    private _workorderlistUrl = 'https://qa-workorders.e-ins.net/api/workorder/GetListByQueueAndUser/';
+export class WorkOrderActivityService {
+    private _devworkorderlistUrl = 'http://localhost:55299/api/workorder/GetActivity/';
+    private _workorderlistUrl = 'https://qa-workorders.e-ins.net/api/workorder/GetActivity/';
 
     constructor(private _http: HttpClient) { }
 
-    public getWorkOrderNotes(workOrderNumber: string): Observable<any> {
-        console.log('WorkOrderNoteService: getWorkOrderList for: ' + workOrderNumber);
+    public getWorkOrderActivity(workOrderNumber: number): Observable<any> {
+        console.log('WorkOrderActivityService: getWorkOrderActivity for: ' + workOrderNumber);
         return this._http.get(this._devworkorderlistUrl + workOrderNumber)
-        .do (data => console.log('WorkOrderNotesService:getWorkOrderNotes:WO#' + workOrderNumber + ': ' + JSON.stringify(data)))
+        .do (data => console.log('WorkOrderActivityService:getWorkOrderAcitivity:WO#' + workOrderNumber + ': ' + JSON.stringify(data)))
         .catch(this.errorHandler);
     }
 
     private errorHandler(ex: HttpErrorResponse) {
-        console.log('WorkOrderNotesService.ts ERROR: ' + ex.message);
+        console.log('WorkOrderActivityService.ts ERROR: ' + ex.message);
         return Observable.throw(ex);
     }
 }

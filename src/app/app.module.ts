@@ -11,14 +11,14 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { AppComponent } from './app.component';
 import { QueuesComponent } from './workorders/queues.component';
 import { WorkOrderListComponent } from './workorders/workorderlist.component';
-import { WorkOrderNotesComponent } from './workorders/workordernotes.component';
+import { WorkOrderActivityComponent } from './workorders/workorderactivity.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         QueuesComponent,
         WorkOrderListComponent,
-        WorkOrderNotesComponent
+        WorkOrderActivityComponent
     ],
     imports: [
         BrowserModule,
