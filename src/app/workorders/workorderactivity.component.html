@@ -1,25 +1,22 @@
 <div class="error">{{errorMessage}}</div>
-<div class="workOrderNotes">
-    <div class="boxtitle">
-        <div class="innerborder">
-            <span class="boxtext">WO#{{selectedWorkOrder}}</span>
-        </div>
-    </div>
-    <kendo-grid #activitygrid 
-        [data]="workorderactivities" 
-        (rowClass)="hideExpansionIndicator"     
-        style="font-size: inherit;">
-        <kendo-grid-column field="InputDateTime" title="Input Date Time" width="40">
-            <ng-template kendoGridCellTemplate let-dataItem>
-                {{dataItem.DateTimeInput | date:'shortDate'}}
-            </ng-template>
-        </kendo-grid-column>        
-        <kendo-grid-column field="WorkOrderNumber" title="WO#" width="40"></kendo-grid-column>
-        <kendo-grid-column field="EnteredByUID" title="Entered By" width="40"></kendo-grid-column> 
-        
-            <div *kendoGridDetailTemplate="let dataItem">    
-                {{dataItem.Text}}
-            </div>         
-        
-    </kendo-grid>      
+<div class="workOrderActivity">
+    <!-- <span class="boxtext">WO#{{selectedWorkOrder}}</span> -->
+    <div class="activitylist" *ngIf="haveActivities">
+        <kendo-grid #activitygrid 
+            [data]="workorderactivities" 
+            (rowClass)="hideExpansionIndicator"     
+            style="font-size: inherit;">
+            <kendo-grid-column field="InputDateTime" title="Input Date Time" width="40">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.DateTimeInput | date:'shortDate'}}
+                </ng-template>
+            </kendo-grid-column>        
+            <kendo-grid-column field="WorkOrderNumber" title="WO#" width="40"></kendo-grid-column>
+            <kendo-grid-column field="EnteredByUID" title="Entered By" width="40"></kendo-grid-column> 
+            
+                <div *kendoGridDetailTemplate="let dataItem">    
+                    {{dataItem.Text}}
+                </div>                     
+        </kendo-grid>     
+    </div>    
 </div>

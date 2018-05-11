@@ -5,7 +5,7 @@
             <span class="boxtext"> Queues</span>
         </div>
     </div>
-
+	<spinner *ngIf="showAnimation"></spinner>
     <div #ktree class="treecontainer">
         <kendo-treeview style="font-size: inherit;"
             [nodes]="queues"

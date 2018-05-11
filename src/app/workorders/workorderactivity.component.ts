@@ -19,6 +19,7 @@ export class WorkOrderActivityComponent implements OnInit, OnChanges {
 
   private _dataService;
   public workorderactivities = [];
+  public haveActivities = false;
   public workOrderNumber: string;
   public errorMessage: string;
 
@@ -36,18 +37,19 @@ export class WorkOrderActivityComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit(): void {
-    console.log('WorkOrderActivity: ngOnInit: fired ');
+    console.log('WorkOrderActivity: ngOnInit: fired ');    
   }
 
   ngOnChanges(): void {
     console.log('WorkOrderActivity: ngOnChanges: selectedWorkOrder: ' + this.selectedWorkOrder + ' id=' + this.userNetworkId);
     // if (this.networkId = 'NA') { return; }
     if (this.selectedWorkOrder) {
+    this.haveActivities = true;
     this._dataService.getWorkOrderActivity(this.selectedWorkOrder)
         .subscribe(workorderactivities => {
             this.workorderactivities = workorderactivities;
             this.expandAllRows();
-            console.log('WorkOrderActivity: received data: ' + JSON.stringify(workorderactivities));
+            console.log('WorkOrderActivity: received data: '); //  + JSON.stringify(workorderactivities));
         },
         ex => this.errorMessage = <any>ex);
     }

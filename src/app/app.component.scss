@@ -19,23 +19,27 @@
 .leftpanel {
     width: 230px;
     border: 0px solid purple;
+    padding: 3px;
 }
 
 .middlepanel {
     width:400px;
     border: 0px solid red;
+    padding: 3px; 
 }
 
 .rightpanel {
     width: 470px;    
     border: 0px solid green;
+    padding: 3px; 
 }
 
 
 .boxtitle {
     width: 100%;
     background: linear-gradient(#d9e6f8, #7a9dca) ;
-    font-weight: bold;
+    font-family: 'Century Gothic','Segoe UI', sans-serif;
+    font-weight: bolder;
     font-size: 14pt;
     border: 1px solid #4a6e9e;
 }

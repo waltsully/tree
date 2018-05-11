@@ -27,8 +27,9 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     @Output() selectedQueue: EventEmitter<IQueueFocus> = new EventEmitter<IQueueFocus>( );
 
     private _dataService;
-    public queues: IQueue[] = [];
     private queueInFocus = <IQueueFocus>{};
+    public queues: IQueue[] = [];
+    public showAnimation = true;
     public errorMessage: string;
     public expandedKeys: string[] = ['Assigned Users'];
     public selectedKeys: string[] = ['Walter Sully'];
@@ -40,29 +41,29 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        console.log('Queues: ngOnInit fired. Waiting for data...');
+        console.log('QueuesComponent: ngOnInit fired. Waiting for data...');
         this._dataService.getQueues()
             .subscribe(queues => {
                 this.queues = queues;
-                // console.log('Queues: service returned data=' + JSON.stringify(this.queues));
+                this.showAnimation = false;
+                console.log('QueuesComponent: * * * * * * * * * * HIDING SPINNER');
+                // console.log('QueuesComponent: service returned data=' + JSON.stringify(this.queues));  
                 this.doSelectDefault();
             },
                 ex => this.errorMessage = <any>ex);
     }
 
     ngAfterViewInit(): void {
-        console.log('Queues: ngAfterViewInit fired.');
+        console.log('QueuesComponent: ngAfterViewInit fired.');
     }
 
     // we handle treeview navigation event here...
 
     public onRowSelected({index, dataItem}: any): void {
-        console.log('QueuesComponent:onSelectionChanged: index=' + index + 'dataItem: ' + JSON.stringify(dataItem));
+        console.log('QueuesComponent:onSelectionChanged: index=' + index ); // + 'dataItem: ' + JSON.stringify(dataItem));
         // NOTE: dataItem will contain all the children nodes for a click on top-level node
-        // console.log('Queues component:onSelectionChanged: dataItem=' + JSON.stringify(dataItem));
         this.queueInFocus.userName = dataItem.Caption;
         this.queueInFocus.userNetworkId = dataItem.UserNetworkId;
-
         // console.log('Queues component:onSelectionChanged emitting: ' + JSON.stringify(this.queueInFocus));
         // propagate to parent container...
         this.selectedQueue.emit(this.queueInFocus);
@@ -78,7 +79,7 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     doSelectDefault(): void {
         this.queueInFocus.userName = 'Walter Sully';
         this.queueInFocus.userNetworkId = 'wsully';
-        console.log('Queues: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));
+        console.log('QueuesComponent: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));
         this.selectedQueue.emit(this.queueInFocus);
     }
 }

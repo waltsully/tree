@@ -53,7 +53,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
             this._dataService.getWorkOrderList(this.userNetworkId)
                 .subscribe(workorderlist => {
                     this.workorderlist = workorderlist;
-                    console.log('WorkOrderListComponent: defualt is 1st row: ' + JSON.stringify(this.workorderlist[0].WorkOrderNumber));
+                    console.log('WorkOrderListComponent: default is 1st row: ' + JSON.stringify(this.workorderlist[0]));
                     this._workOrderInFocus.workOrderNumber = this.workorderlist[0].WorkOrderNumber;
                     this._workOrderInFocus.userNetworkId = this.workorderlist[0].UserNetworkId;
                     this.expandAllRows();
