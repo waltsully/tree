@@ -1,5 +1,51 @@
 .workOrderActivity {
     background-color:white;
-    height: 540px;
+    height: 539px;
+    overflow-y: scroll;
+    padding: 2px;
     border: 0px dotted black;  // layout debugging - this may be deleted
+}
+
+.activitylist span {
+    display: inline-block;
+} 
+
+.header {
+    background-color: #cde0fc;
+}
+
+.itemsheader {
+    margin-bottom: 2px;
+}
+
+.itemsheader span  {
+    color: black;
+    padding-left: 3px;
+}
+
+.item {
+    color: black;
+    border: 1px solid #cde0fc; 
+}
+
+.itemtext {
+    color:gray;
+    padding-left: 3px;
+}
+
+.col1 {
+    width:145px;
+    padding-left: 3px;
+    border: 0px solid green; 
+    
+}
+
+.col2 {
+    width:142px;
+    border: 0px solid blue; 
+}
+
+.col3 {
+    width:143px;
+    border: 0px solid red; 
 }

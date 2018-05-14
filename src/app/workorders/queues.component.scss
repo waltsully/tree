@@ -10,7 +10,7 @@ div.treecontainer {
 .k-treeview-lines {
     border: 0px solid purple;  // layout debugging  - this may be deleted
     width: 100%;
-    height: 506px;
+    height: 510px;
     }
 
 .k-treeview-lines .k-mid .k-in {
@@ -34,6 +34,9 @@ div.treecontainer {
     background-color: lightgrey;
     color: black;
     border: 1px solid lightgray;
+}
+.withcolor {
+    color: blue;
 }
 
 spinner {    

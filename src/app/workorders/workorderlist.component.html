@@ -1,16 +1,21 @@
 <div class="error">{{errorMessage}}</div>
 <div class="workOrderList">
-    <div class="boxtitle">
+    <div class="boxoutline">
         <div class="innerborder">
             <span class="boxtext">Work Orders - {{selectedQueue}}</span>
             <!-- <span>({{userNetworkId}})</span> -->
         </div>
     </div>
+    <table>
+        <thead>
+            <th></th>
+        </thead>
+    </table>
     <kendo-grid #listgrid 
         [data]="workorderlist" 
         [selectable]="true"
         (selectionChange)="onRowSelected($event)"  
-        (rowClass)="hideExpansionIndicator"     
+        [rowClass]="isOverDue"     
         style="font-size: inherit;">
 
         <kendo-grid-column field="WorkOrderType" title="*" width="10"></kendo-grid-column>

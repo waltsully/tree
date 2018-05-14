@@ -81,8 +81,9 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
         }
     }
 
-    public hideExpansionIndicator(context: RowClassArgs) {
-        console.log('WorkOrderListComponent: hideExpansionIndicator for row#' + context.index);
+    public isOverDue = (context: RowClassArgs) => {
+        console.log('WorkOrderListComponent: isOverDue callback row#' + context.index);
+        return 'overdue';
     }
 
     public onExpand(data, index) {

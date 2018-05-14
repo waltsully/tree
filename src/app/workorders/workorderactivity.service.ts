@@ -18,7 +18,7 @@ export class WorkOrderActivityService {
     public getWorkOrderActivity(workOrderNumber: number): Observable<any> {
         console.log('WorkOrderActivityService: getWorkOrderActivity for: ' + workOrderNumber);
         return this._http.get(this._devworkorderlistUrl + workOrderNumber)
-        .do (data => console.log('WorkOrderActivityService:getWorkOrderAcitivity:WO#' + workOrderNumber + ': ' + JSON.stringify(data)))
+        .do (data => console.log('WorkOrderActivityService:getWorkOrderAcitivity: data: ')) //  + JSON.stringify(data)))
         .catch(this.errorHandler);
     }
 

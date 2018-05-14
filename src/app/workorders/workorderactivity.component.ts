@@ -27,35 +27,29 @@ export class WorkOrderActivityComponent implements OnInit, OnChanges {
     this._dataService = workOrderActivityService;
   }
 
-  public onRowSelected({index, dataItem}) {
-
-}
-
-  private expandAllRows() {
-    for (let i = 0; i < this.workorderactivities.length; i++) {
-        this.activityGrid.expandRow(i);
-    }
-  }
   ngOnInit(): void {
-    console.log('WorkOrderActivity: ngOnInit: fired ');    
+    console.log('WorkOrderActivity: ngOnInit: fired ');
   }
 
   ngOnChanges(): void {
     console.log('WorkOrderActivity: ngOnChanges: selectedWorkOrder: ' + this.selectedWorkOrder + ' id=' + this.userNetworkId);
+    if (Number(this.selectedWorkOrder) < 0) {
+      this.workorderactivities = [];
+      this.haveActivities = false;
+      return;
+    }
     // if (this.networkId = 'NA') { return; }
     if (this.selectedWorkOrder) {
-    this.haveActivities = true;
     this._dataService.getWorkOrderActivity(this.selectedWorkOrder)
         .subscribe(workorderactivities => {
             this.workorderactivities = workorderactivities;
-            this.expandAllRows();
+            this.haveActivities = true;
+           // this.expandAllRows();
             console.log('WorkOrderActivity: received data: '); //  + JSON.stringify(workorderactivities));
         },
         ex => this.errorMessage = <any>ex);
     }
   }
-
-
 
 
 }

@@ -13,13 +13,15 @@ import { AppComponent } from './app.component';
 import { QueuesComponent } from './workorders/queues.component';
 import { WorkOrderListComponent } from './workorders/workorderlist.component';
 import { WorkOrderActivityComponent } from './workorders/workorderactivity.component';
+import { NewLineToHtmlBreak } from './workorders/nl2br';
 
 @NgModule({
     declarations: [
         AppComponent,
         QueuesComponent,
         WorkOrderListComponent,
-        WorkOrderActivityComponent
+        WorkOrderActivityComponent,
+        NewLineToHtmlBreak
     ],
     imports: [
         BrowserModule,

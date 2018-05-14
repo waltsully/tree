@@ -1,6 +1,6 @@
 <div class="error">{{errorMessage}}</div>
 <div class="workOrderQueues">
-    <div class="boxtitle">
+    <div class="boxoutline">
         <div class="innerborder">
             <span class="boxtext"> Queues</span>
         </div>
@@ -24,7 +24,8 @@
         <ng-template kendoTreeViewNodeTemplate let-dataItem>
                 <span [ngClass]="iconClass(dataItem)"></span>
                 <span>{{dataItem.Caption}}</span>
-                <span class="custom-right">[{{dataItem.Count}}]</span>
+                <span *ngIf="dataItem.ParentId == 0" class="custom-right withcolor">({{dataItem.Count}})</span>
+                <span *ngIf="dataItem.ParentId != 0" class="custom-right">[{{dataItem.Count}}]</span>
         </ng-template>
         </kendo-treeview>
     </div>

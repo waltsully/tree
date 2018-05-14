@@ -32,7 +32,7 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     public showAnimation = true;
     public errorMessage: string;
     public expandedKeys: string[] = ['Assigned Users'];
-    public selectedKeys: string[] = ['Walter Sully'];
+    public selectedKeys: string[];
     public hasChildren = (item: any) => item.Children && item.Children.length > 0;
     public fetchChildren = (item: any) => of(item.Children);
 
@@ -47,7 +47,7 @@ export class QueuesComponent implements OnInit, AfterViewInit {
                 this.queues = queues;
                 this.showAnimation = false;
                 console.log('QueuesComponent: * * * * * * * * * * HIDING SPINNER');
-                // console.log('QueuesComponent: service returned data=' + JSON.stringify(this.queues));  
+                console.log('QueuesComponent: service returned data=' + JSON.stringify(this.queues));
                 this.doSelectDefault();
             },
                 ex => this.errorMessage = <any>ex);
@@ -79,7 +79,11 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     doSelectDefault(): void {
         this.queueInFocus.userName = 'Walter Sully';
         this.queueInFocus.userNetworkId = 'wsully';
+        // TO DO: search this.queues userNetworkId using given if to get userName to set selectedKeys
+        this.selectedKeys = [this.queueInFocus.userName];
+        console.log('selectedKeys=' + this.selectedKeys);
         console.log('QueuesComponent: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));
+        setTimeout(() => document.querySelector('.k-state-selected').scrollIntoView());
         this.selectedQueue.emit(this.queueInFocus);
     }
 }
