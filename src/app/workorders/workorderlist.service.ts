@@ -10,14 +10,14 @@ import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
 export class WorkOrderListService {
-    private _devworkorderlistUrl = 'http://localhost:55299/api/workorder/GetListByQueueAndUser/';
-    private _workorderlistUrl = 'https://qa-workorders.e-ins.net/api/workorder/GetListByQueueAndUser/';
+    private _devworkorderlistUrl = 'http://localhost:55299/api/workorder/GetListByUserAndQueue/';
+    private _workorderlistUrl = 'https://qa-workorders.e-ins.net/api/workorder/GetListByUserAndQueue/';
 
     constructor(private _http: HttpClient) { }
 
-    public getWorkOrderList(userNetworkId: string): Observable<any> {
-        return this._http.get(this._devworkorderlistUrl + userNetworkId)
-            .do (data => console.log('WorkOrderListService:getWorkOrderList returning data for: ' + userNetworkId))
+    public getWorkOrderList(userNetworkId: string, queueId: number): Observable<any> {
+        return this._http.get(this._devworkorderlistUrl + userNetworkId + '/' + queueId)
+            .do (data => console.log('WorkOrderListService:getWorkOrderList returning data: '))
             .catch(this.errorHandler);
     }
 

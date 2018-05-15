@@ -25,7 +25,8 @@ export interface IWorkOrderFocus {
 })
 export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges {
     @ViewChild('listgrid') listGrid: GridComponent;
-    @Input() selectedQueue: string;      // displayed in our View & it is databound to parent html [data]
+    @Input() selectedQueueName: string;  // displayed in our View & it is databound to parent html [data]
+    @Input() selectedQueueId: number;
     @Input() userNetworkId: string;      // used to fetch new grid data
     @Output() selectedWorkOrder: EventEmitter<IWorkOrderFocus> = new EventEmitter<IWorkOrderFocus>();
 
@@ -39,7 +40,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     }
 
     ngOnInit(): void {
-        console.log('WorkOrderListComponent: ngOnInit fired: selecting ' + this.selectedQueue + ' id=' + this.userNetworkId);
+        console.log('WorkOrderListComponent: ngOnInit fired: selecting ' + this.selectedQueueId + ' id=' + this.userNetworkId);
     }
 
     ngAfterViewInit(): void {
@@ -47,10 +48,10 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     }
 
     ngOnChanges() {
-        console.log('WorkOrderListComponent: ngOnChanges: selectedQueue: ' + this.selectedQueue + ' id=' + this.userNetworkId);
-        if (this.selectedQueue) {
+        console.log('WorkOrderListComponent: ngOnChanges: selectedQueueId: ' + this.selectedQueueId + ' id=' + this.userNetworkId);
+        if (this.selectedQueueName) {
          // if queue is defined it means it changed and we need to load a new set of workorders...
-            this._dataService.getWorkOrderList(this.userNetworkId)
+            this._dataService.getWorkOrderList(this.userNetworkId, this.selectedQueueId)
                 .subscribe(workorderlist => {
                     this.workorderlist = workorderlist;
                     console.log('WorkOrderListComponent: default is 1st row: ' + JSON.stringify(this.workorderlist[0]));
@@ -82,8 +83,9 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     }
 
     public isOverDue = (context: RowClassArgs) => {
-        console.log('WorkOrderListComponent: isOverDue callback row#' + context.index);
-        return 'overdue';
+        // console.log('WorkOrderListComponent: isOverDue callback row#' + context.index);
+        // TO DO: date compare logic goes here
+        return 'overdue';  // this is a class definied in the component's scss file
     }
 
     public onExpand(data, index) {

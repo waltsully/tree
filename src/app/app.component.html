@@ -7,7 +7,8 @@
     </app-queues>
   </div>   
   <div class="middlepanel">    
-    <app-workorderlist [selectedQueue]='selectedQueue'
+    <app-workorderlist [selectedQueueName]='selectedQueueName'
+                       [selectedQueueId]='selectedQueueId'  
                        [userNetworkId]='userNetworkId'
                        (selectedWorkOrder)='onSelectedWorkOrderChanged($event)'>
     </app-workorderlist>
@@ -19,7 +20,7 @@
   </div>
 </div>
 <div class="statusbar">
-    <div class="itemcount">23 Items</div>
+    <div class="itemcount">{{selectedQueueItemCount}} Items</div>
     <div class="loggedinas">Walter Sully</div>
-    <div class="currentdate">5/14/2018</div>
+    <div class="currentdate">{{today | date:short}}</div>
   </div>

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges,
          ViewEncapsulation } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { IQueueFocus } from './workorders/queues.component';
 import { IWorkOrderFocus } from './workorders/workorderlist.component';
 
@@ -13,15 +14,24 @@ import { IWorkOrderFocus } from './workorders/workorderlist.component';
 })
 
 export class AppComponent implements OnInit, AfterViewInit, OnChanges {
-    @Input() selectedQueue: string;
+    @Input() selectedQueueName: string;
+    @Input() selectedQueueId: number;
     @Input() userNetworkId: string;
     @Input() selectedWorkOrder: string;
+
+    public selectedQueueItemCount: number;
+    public today: Date;
+
+    constructor() {
+    }
 
     onSelectedQueueChanged($event: any) {
        console.log ('AppComponent: onSelectedQueueChanged: ' + JSON.stringify($event));
        this.userNetworkId = $event.userNetworkId;
-       this.selectedQueue = $event.userName;
-       console.log ('AppComponent: set Queue bindings: ' + this.selectedQueue + ',' + this.userNetworkId);
+       this.selectedQueueName = $event.userName;
+       this.selectedQueueId = $event.queueId;
+       this.selectedQueueItemCount = $event.itemCount;
+       console.log ('AppComponent: set Queue bindings: ' +  this.selectedQueueName + ',' + this.selectedQueueId + ',' + this.userNetworkId);
     }
 
     onSelectedWorkOrderChanged($event: any) {
@@ -33,6 +43,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnChanges {
 
     ngOnInit(): void {
         console.log('AppComponent: ngOnInit fired.');
+        this.today = new Date();
      }
 
     ngAfterViewInit(): void {

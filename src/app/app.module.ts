@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
@@ -33,7 +34,7 @@ import { NewLineToHtmlBreak } from './workorders/nl2br';
         ButtonsModule,
         SpinnerModule.forRoot({  animation: 'spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite'})
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

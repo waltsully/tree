@@ -11,6 +11,8 @@ const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileN
 export interface IQueueFocus {
     userName: string;
     userNetworkId: string;
+    queueId: number;
+    itemCount: number;
 }
 
 @Component({
@@ -64,7 +66,9 @@ export class QueuesComponent implements OnInit, AfterViewInit {
         // NOTE: dataItem will contain all the children nodes for a click on top-level node
         this.queueInFocus.userName = dataItem.Caption;
         this.queueInFocus.userNetworkId = dataItem.UserNetworkId;
-        // console.log('Queues component:onSelectionChanged emitting: ' + JSON.stringify(this.queueInFocus));
+        this.queueInFocus.queueId = (dataItem.NodeId < 7) ? dataItem.NodeId : dataItem.ParentId;
+        this.queueInFocus.itemCount = dataItem.Count;
+        console.log('QueuesComponent:onSelectionChanged emitting: ' + JSON.stringify(this.queueInFocus));
         // propagate to parent container...
         this.selectedQueue.emit(this.queueInFocus);
     }
@@ -77,9 +81,13 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     }
 
     doSelectDefault(): void {
+        // TO DO: implement app initialization...
+        // once routing implemented we'll use networkId to search queues list & set-up queue in focus
         this.queueInFocus.userName = 'Walter Sully';
         this.queueInFocus.userNetworkId = 'wsully';
-        // TO DO: search this.queues userNetworkId using given if to get userName to set selectedKeys
+        this.queueInFocus.queueId = 7;
+        this.queueInFocus.itemCount = 2;
+
         this.selectedKeys = [this.queueInFocus.userName];
         console.log('selectedKeys=' + this.selectedKeys);
         console.log('QueuesComponent: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));

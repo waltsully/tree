@@ -1,6 +1,9 @@
 .workOrderList {
     background-color:white;   
-    border: 0px dotted black;  // layout debugging - this may be deleted         
+}
+
+.overdue {
+    background-color: white;     // change to color:red; when the rowClass issue in grid is fixed
 }
 
 .k-grid {
@@ -15,6 +18,10 @@
     background-color: white; 
 }
 
+.k-grid tr {
+    background-color: white; 
+ }
+
 .k-detail-row .k-alt {
     background-color: white; 
     color: blue;
@@ -22,8 +29,4 @@
 
 .k-hierarchy-cell a  {
     border: 0px solid red;  // debugging
-}
-
-.overdue {
-    color: red;
 }
