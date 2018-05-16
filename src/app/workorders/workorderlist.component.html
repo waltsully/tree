@@ -7,15 +7,11 @@
             <span> ({{userNetworkId}}) </span> -->
         </div>
     </div>
-    <table>
-        <thead>
-            <th></th>
-        </thead>
-    </table>
     <kendo-grid #listgrid 
         [data]="workorderlist" 
         [selectable]="true"
         (selectionChange)="onRowSelected($event)"  
+        (dblclick)="openDetail($event)"
         [rowClass]="isOverDue"     
         style="font-size: inherit;">
 
@@ -42,3 +38,4 @@
         </ng-template>
     </kendo-grid>      
 </div>
+<app-workorderdetails [dialogOpened]='showDetailsForm'></app-workorderdetails>

@@ -1,8 +1,8 @@
 import { Component,  OnInit, AfterViewInit, OnChanges, Input, Output,
-         ViewEncapsulation,   ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { of } from 'rxjs/observable/of';
+         ViewEncapsulation,   ViewChild, ElementRef, EventEmitter    } from '@angular/core';
 import { GridComponent, RowClassArgs, CellClickEvent, SelectionEvent } from '@progress/kendo-angular-grid';
+import { of } from 'rxjs/observable/of';
+import { DatePipe } from '@angular/common';
 
 import { WorkOrderListService } from './workorderlist.service';
 import { IWorkOrderInfo } from './workorderinfo';
@@ -34,6 +34,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     private _workOrderInFocus = <IWorkOrderFocus>{};
     public workorderlist = [];
     public errorMessage: string;
+    public showDetailsForm = false;
 
     constructor(workOrderListService: WorkOrderListService) {
         this._dataService = workOrderListService;
@@ -66,6 +67,12 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
                 },
                     ex => this.errorMessage = <any>ex);
             }
+    }
+
+
+    public openDetail($event): void {
+        console.log('WorkOrderListComponent: openDetail (dbl-click) $event:' + JSON.stringify($event));
+        this.showDetailsForm = true;
     }
 
     public onRowSelected($event): void {

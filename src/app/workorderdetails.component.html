@@ -1,0 +1,29 @@
+<kendo-window [minWidth]="250" [width]="450" title="{{windowTitle}}"
+  *ngIf="dialogOpened"
+  (dragStart)="onDragStart()"
+  (dragEnd)="onDragEnd()"
+  (resizeStart)="onResizeStart()"
+  (resizeEnd)="onResizeEnd()"
+  (stateChange)="onStateChange($event)"
+  (close)="onClose()"
+>
+<form class="k-form">
+  <fieldset>
+      <legend>User Details</legend>
+
+      <label class="k-form-field">
+          <span>First Name</span>
+          <input class="k-textbox" placeholder="Your Name" />
+      </label>
+      <label class="k-form-field">
+          <span>Last Name</span>
+          <input class="k-textbox" placeholder="Your Last Name" />
+      </label>
+  </fieldset>
+
+  <div class="text-right">
+      <button type="button" class="k-button" (click)="onCloseForm()">Close Form</button>
+      <button type="button" class="k-button k-primary" (click)="onSaveChanges()">Save Changes</button>
+  </div>
+</form>
+</kendo-window>

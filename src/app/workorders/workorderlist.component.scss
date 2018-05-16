@@ -6,8 +6,20 @@
     background-color: white;     // change to color:red; when the rowClass issue in grid is fixed
 }
 
+// remove fat...
+.k-grid td,  .k-grid th {
+    padding:0;
+}
+
+// remove borders...
+
+
 .k-grid {
     height: 513px;   
+}
+
+.table-header-cell {
+    background-color: black;
 }
 
 .k-alt .k-master-row {
@@ -16,6 +28,7 @@
 
 .k-detail-cell {
     background-color: white; 
+    border: 2px solid green;
 }
 
 .k-grid tr {
@@ -28,5 +41,6 @@
 }
 
 .k-hierarchy-cell a  {
-    border: 0px solid red;  // debugging
+
+    border: 1px solid red;  // debugging
 }
