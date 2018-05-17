@@ -1,32 +1,42 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app-workorderdetails',
   templateUrl: './workorderdetails.component.html',
   styleUrls: ['./workorderdetails.component.scss']
 })
 
 export class WorkOrderDetailsComponent implements OnInit {
-  @Input() dialogOpened = false;
+  @Input() workOrderNumber: string;
+  @Input() dialogOpened: boolean;
+  @Output() childDialogMessage: EventEmitter<string> = new EventEmitter<string>();
   public windowOpened = false;
-  public windowTitle = 'Work Order Details';
+  public windowTitle = 'Work Order Details ' + this.workOrderNumber;
 
   constructor() {
+  }
+
+  public onTabSelect($event) {
+    console.log('onTabSelect: ' + JSON.stringify($event));
   }
 
     public onClose(): void {
       console.log('Dialog Closed');
       this.dialogOpened = false;
+      this.childDialogMessage.emit('Closed');
     }
 
-    public onCloseForm(): void {
+    public onCancelForm(): void {
       console.log('Dialog Canceled');
       this.dialogOpened = false;
+      this.childDialogMessage.emit('Cancelled');
     }
 
     public onSaveChanges(): void {
       console.log('Changes Saved');
       this.dialogOpened = false;
+      this.childDialogMessage.emit('Saved');
     }
 
     public onOpen(): void {

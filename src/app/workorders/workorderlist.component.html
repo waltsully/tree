@@ -38,4 +38,8 @@
         </ng-template>
     </kendo-grid>      
 </div>
-<app-workorderdetails [dialogOpened]='showDetailsForm'></app-workorderdetails>
+<app-workorderdetails [workOrderNumber]='workOrderNumber'
+                      [dialogOpened]='childDialogOpened'
+                      (childDialogMessage)='childDialogMessage($event)'
+                      >
+</app-workorderdetails>

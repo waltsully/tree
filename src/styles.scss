@@ -1,11 +1,14 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
+// @import "variables";
+$font-size: 8pt;
+@import "~bootstrap/dist/css/bootstrap.css";
 @import "@progress/kendo-theme-bootstrap/";
+
 
 // application scope SCSS
 
 body {
-    margin-left:50px;   
-    font-size: 8pt;   
+    margin-left: 50px;   
+    font-size: $font-size; 
     font-family: Tahoma, Verdana, sans-serif; 
 }
 .error {
@@ -26,3 +29,4 @@ body {
     font-style: italic;
     margin-left: 4px;
 }
+

@@ -34,7 +34,8 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     private _workOrderInFocus = <IWorkOrderFocus>{};
     public workorderlist = [];
     public errorMessage: string;
-    public showDetailsForm = false;
+    public childDialogOpened: boolean;
+    //    public detailsFormClosed = true;
 
     constructor(workOrderListService: WorkOrderListService) {
         this._dataService = workOrderListService;
@@ -49,6 +50,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     }
 
     ngOnChanges() {
+        console.log('WorkOrderListComponent: ngOnChanges: showDetailsForm:' +  this.openDetail);
         console.log('WorkOrderListComponent: ngOnChanges: selectedQueueId: ' + this.selectedQueueId + ' id=' + this.userNetworkId);
         if (this.selectedQueueName) {
          // if queue is defined it means it changed and we need to load a new set of workorders...
@@ -69,10 +71,16 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
             }
     }
 
+    public childDialogMessage($event) {
+        // child component Work Order Details has sent us a message...
+        console.log('WorkOrderListComponent: childDialogMessage: ' + JSON.stringify($event));
+        this.childDialogOpened = false;
+    }
 
     public openDetail($event): void {
+        // double-click on Work Order Listoccured...
         console.log('WorkOrderListComponent: openDetail (dbl-click) $event:' + JSON.stringify($event));
-        this.showDetailsForm = true;
+        this.childDialogOpened = true;
     }
 
     public onRowSelected($event): void {
