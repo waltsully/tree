@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .workOrderList {
     background-color:white;   
 }
@@ -6,13 +8,14 @@
     background-color: white;     // change to color:red; when the rowClass issue in grid is fixed
 }
 
+// Kendo Component overrides
+
 // remove fat...
 .k-grid td,  .k-grid th {
     padding:0;
 }
 
-// remove borders...
-
+// remove borders from grid...
 
 .k-grid {
     height: 513px;   

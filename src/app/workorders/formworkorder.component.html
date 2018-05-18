@@ -1,0 +1,38 @@
+<div class="formcontainer">
+  <div class="input-box formpanel border border-secondary">
+    <label for="WONumber" >WO Number:</label>
+    <input id="WONumber" class="k-textbox" value="{{workOrderNumber}}"><br>
+    <label for="EnteredBy">Entered By:</label>
+    <input id="EnteredBy" class="k-textbox"><br>
+    <label for="DateEntered">Date Entered:</label>
+    <input id="DateEntered" class="k-textbox"><br>
+    <label for="TimeEntered">Time Entered:</label>
+    <input id="TimeEntered" class="k-textbox"><br>
+    <label for="KeyWords">Key Words:</label>
+    <textarea id="KeyWords"></textarea>
+  </div>
+
+  <div class="assigned-box formpanel border border-secondary">
+    <label for="WONumber"><span>WO Assigned To:</span></label>
+    <kendo-dropdownlist [data]="userList" value="Walt Sully"></kendo-dropdownlist>
+   
+    <label for="DueDate">Due Date:</label>
+    <input id="DueDate" class="k-textbox"><br>
+    
+    <label for="Priority">Date Entered:</label>
+    <kendo-dropdownlist></kendo-dropdownlist>
+    
+    <label for="TimeEntered">Time Entered:</label>
+    <input id="TimeEntered" class="k-textbox"><br>
+  </div>
+  <div class="workcomplete-box formpanel border border-secondary">
+    <label for="WONumber" >WO Number:</label>
+    <input id="WONumber" class="k-textbox" value="{{workOrderNumber}}"><br>
+    <label for="EnteredBy">Entered By:</label>
+    <input id="EnteredBy" class="k-textbox"><br>
+    <label for="DateEntered">Date Entered:</label>
+    <input id="DateEntered" class="k-textbox"><br>
+    <label for="TimeEntered">Time Entered:</label>
+    <input id="TimeEntered" class="k-textbox"><br>
+  </div>
+</div>

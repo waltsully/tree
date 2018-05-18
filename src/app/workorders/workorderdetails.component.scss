@@ -1,0 +1,58 @@
+@import "../../variables";
+
+.titlebarcontents {
+    width: 100%;
+    border: 3 dotted red;
+    padding: 0;
+}
+
+.title {
+    font-size: 1.2em;
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.window-actions {
+    float: right;
+    padding: 0;
+}
+
+// Kendo Component overrides for the containing Window
+
+.k-window {
+    background-color: $form-background-color;
+}
+
+ .k-window-titlebar, .k-button {
+    padding: 0 px;
+    line-height: 10pt;
+}
+
+.k-i-close{
+    zoom: 0.8;
+    padding: 0;
+}
+
+.k-tabstrip-items {
+    background-color: $form-background-color;   // the area where there are no tabs
+}
+
+.k-tabstrip-items .k-item {
+    background-color: $form-background-color
+}
+
+.k-tabstrip > .k-tabstrip-items .k-item {
+    color: black;
+    font-weight: bold;
+    border-right: 1px solid silver;
+    border-top: 1px solid silver;
+    border-radius: 5px;
+    
+    &:hover {
+       background-color: silver;
+    }
+}
+
+
+

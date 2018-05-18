@@ -6,6 +6,7 @@ import { QueuesService } from './queues.service';
 import { IQueue } from './queue';
 import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
+
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
 
 export interface IQueueFocus {
@@ -90,6 +91,7 @@ export class QueuesComponent implements OnInit, AfterViewInit {
 
         this.selectedKeys = [this.queueInFocus.userName];
         console.log('selectedKeys=' + this.selectedKeys);
+        console.log('****** dataitem: ' + JSON.stringify('?'));
         console.log('QueuesComponent: doSelectDefault emitting: ' + JSON.stringify(this.queueInFocus));
         setTimeout(() => document.querySelector('.k-state-selected').scrollIntoView());
         this.selectedQueue.emit(this.queueInFocus);

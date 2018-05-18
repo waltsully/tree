@@ -1,0 +1,57 @@
+<kendo-window class="rounded-0" [height]="450" style="font:inherit;"
+  *ngIf="dialogOpened"
+  (dragStart)="onDragStart()"
+  (dragEnd)="onDragEnd()"
+  (resizeStart)="onResizeStart()"
+  (resizeEnd)="onResizeEnd()"
+  (stateChange)="onStateChange($event)"
+  (close)="onClose()"  
+>
+<kendo-window-titlebar style="padding:0;">
+    <div class="titlebarcontents">
+        <div class="title">
+            <span class="k-icon k-i-track-changes-enable"></span>
+           <span> Work Order Details {{workOrderNumber}} </span>
+        </div>
+        <div class="window-actions">
+            <button kendoWindowCloseAction style="padding:0;"></button>
+        </div>
+    </div>
+</kendo-window-titlebar>
+
+    <kendo-tabstrip (tabSelect)="onTabSelect($event)" style="font:inherit;">
+        <kendo-tabstrip-tab [title]="'Work Order Information'" [selected]="true">
+            <ng-template kendoTabContent>
+                <app-formworkorder></app-formworkorder>
+            </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab [title]="'Attachments'">         
+            <ng-template kendoTabContent>
+                <p>                       
+                       Attached thingies go here...
+                </p>
+            </ng-template>
+        </kendo-tabstrip-tab>
+
+        <kendo-tabstrip-tab [title]="'Developer Code Comments'">
+            <ng-template kendoTabContent>
+                <p>
+                        Developer Code Comments go here...
+                </p>
+            </ng-template>
+        </kendo-tabstrip-tab>
+
+        <kendo-tabstrip-tab>
+            <ng-template kendoTabTitle>
+                <span class="k-icon k-i-attachment-45 k-i-clip-45 k-flip-v"></span>&nbsp;
+                <span>QA Communications</span>
+            </ng-template>
+            <ng-template kendoTabContent>
+                <p>
+                    QA Communications stuff goes here...
+                </p>
+            </ng-template>
+        </kendo-tabstrip-tab>
+
+    </kendo-tabstrip>
+</kendo-window>
