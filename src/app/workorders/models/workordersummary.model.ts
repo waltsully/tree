@@ -1,4 +1,4 @@
-export interface IWorkOrderInfo {
+export interface IWorkOrderSummary {
     UserId: number;
     UserName: string;
     WorkOrderNumber: number;

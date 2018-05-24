@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
+import { StoreModule } from '@ngrx/store';
+
+
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { GridModule } from '@progress/kendo-angular-grid';
@@ -18,8 +21,7 @@ import { QueuesComponent } from './workorders/queues.component';
 import { WorkOrderListComponent } from './workorders/workorderlist.component';
 import { WorkOrderActivityComponent } from './workorders/workorderactivity.component';
 import { WorkOrderDetailsComponent } from './workorders//workorderdetails.component';
-import { NewLineToHtmlBreak } from './workorders/nl2br';
-import { FormWorkOrderComponent } from './workorders/formworkorder.component';
+import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
 
 
 @NgModule({
@@ -29,13 +31,14 @@ import { FormWorkOrderComponent } from './workorders/formworkorder.component';
         WorkOrderListComponent,
         WorkOrderActivityComponent,
         WorkOrderDetailsComponent,
-        NewLineToHtmlBreak,
-        FormWorkOrderComponent
+        NewLineToHtmlBreak
     ],
     imports: [
+        // StoreModule.forRoot({message: simpleReducer}),
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        DatePipe,        
         BrowserAnimationsModule,
         TreeViewModule,
         GridModule,
