@@ -6,7 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
+import { reducers } from './reducers';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
@@ -17,10 +20,10 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { SpinnerModule } from 'spinner-angular';
 
 import { AppComponent } from './app.component';
-import { QueuesComponent } from './workorders/queues.component';
-import { WorkOrderListComponent } from './workorders/workorderlist.component';
-import { WorkOrderActivityComponent } from './workorders/workorderactivity.component';
-import { WorkOrderDetailsComponent } from './workorders//workorderdetails.component';
+import { QueuesComponent } from './app-panels/queues.component';
+import { WorkOrderListComponent } from './app-panels/workorderlist.component';
+import { WorkOrderActivityComponent } from './app-panels/workorderactivity.component';
+import { WorkOrderDetailsComponent } from './workorders/details-window/workorderdetails.component';
 import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
 
 

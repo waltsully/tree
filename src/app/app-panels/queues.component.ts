@@ -3,7 +3,7 @@ import { Component,  OnInit, AfterViewInit, ViewEncapsulation,
 import { of } from 'rxjs/observable/of';
 
 import { QueuesService } from './queues.service';
-import { IQueue } from './queue';
+import { IQueue } from '../workorders/models/queue.model';
 import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
 

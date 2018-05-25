@@ -5,7 +5,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-import { IWorkOrderInfo } from './workorderinfo';
+import { IWorkOrderSummary } from '../workorders/models/workordersummary.model';
 import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
