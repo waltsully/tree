@@ -5,7 +5,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-import { IQueue } from '../workorders/models/queue.model';
+import { IQueue } from '../../../app/workorders/models/IQueue.model';
 import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()

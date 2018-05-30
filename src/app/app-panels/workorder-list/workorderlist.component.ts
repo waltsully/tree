@@ -5,8 +5,8 @@ import { of } from 'rxjs/observable/of';
 import { DatePipe } from '@angular/common';
 
 import { WorkOrderListService } from './workorderlist.service';
-import { IWorkOrderSummary } from '../workorders/models/workordersummary.model';
-import { IQueueFocus } from './queues.component';
+import { IWorkOrderSummary } from '../../workorders/models/IWorkOrderSummary.model';
+import { IQueueFocus } from '../queues/queues.component';
 
 const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName);
 

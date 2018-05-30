@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges,
          ViewEncapsulation } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { IQueueFocus } from './app-panels/queues.component';
-import { IWorkOrderFocus } from './app-panels/workorderlist.component';
+import { IQueueFocus } from './app-panels/queues/queues.component';
+import { IWorkOrderFocus } from './app-panels/workorder-list/workorderlist.component';
 
 @Component({
     // prevent style encapsulation

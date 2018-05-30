@@ -1,6 +1,6 @@
 import { Time } from '@angular/common';
 
-export interface WorkOrderDetail {
+export interface IWorkOrderDetail {
     WorkOrderNumber: number;
     EnteredBy: string;
     DateEntered: Date;

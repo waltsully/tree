@@ -1,6 +1,6 @@
-import { WorkOrders } from './workorders/models/workorders.model';
+import { IWorkOrderSummary } from './workorders/models/IWorkOrderSummary.model';
 
 export interface AppState {
-    readonly workorders: WorkOrders[];
+    readonly workorders: IWorkOrderSummary[];
 }
 

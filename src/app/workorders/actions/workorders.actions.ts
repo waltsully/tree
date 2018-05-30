@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { WorkOrders } from '../models/workorders.model';
-import { WorkOrderDetail} from '../models/workorderdetail.model';
-
-// Here we are managing a single "in focus" Work Order 
+import { IWorkOrderSummary } from '../models/IWorkOrderSummary.model';
+import { IWorkOrderDetail} from '../models/IWorkOrderDetail.model';
+import { WorkOrderEntity } from '../reducers/workorders.reducer';
 
 export const LOAD_WORKORDERS = '[workorders] Load WorkOrders';
 export class LoadWorkOrders implements Action {
@@ -14,20 +13,24 @@ export class LoadWorkOrders implements Action {
 export const LOAD_WORKORDERS_SUCCESS = '[workorders] Load WorkOrders Success';
 export class LoadWorkOrdersSuccess implements Action {
   readonly type = LOAD_WORKORDERS_SUCCESS;
-  constructor(public workorders: WorkOrderDetail[]) { }
+  constructor(public workorders: WorkOrderEntity[]) { }
 }
 
-export const EDIT_WORKORDERS = '[workorders] Edit WorkOrders';
-export class EditWorkOrders implements Action {
-  readonly type = EDIT_WORKORDERS;
+export const EDIT_WORKORDER = '[workorders] Edit WorkOrder';
+export class EditWorkOrder implements Action {
+  readonly type = EDIT_WORKORDER;
   constructor() { }
 }
 
-export const SAVE_WORKORDERS = '[workorders] Save WorkOrders';
-export class SaveWorkOrders implements Action {
-  readonly type = SAVE_WORKORDERS;
+export const SAVE_WORKORDER = '[workorders] Save WorkOrder';
+export class SaveWorkOrder implements Action {
+  readonly type = SAVE_WORKORDER;
   constructor() { }
 }
 
-export type ALL = LoadWorkOrders | LoadWorkOrdersSuccess | EditWorkOrders | SaveWorkOrders;
+export type ALL = 
+  LoadWorkOrders | 
+  LoadWorkOrdersSuccess | 
+  EditWorkOrder | 
+  SaveWorkOrder;
 

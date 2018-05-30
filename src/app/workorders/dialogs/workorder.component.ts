@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'app-workorderdetails',
-  templateUrl: './workorderdetails.component.html',
-  styleUrls: ['./workorderdetails.component.scss']
+  selector: 'app-workorder',
+  templateUrl: './workorder.component.html',
+  styleUrls: ['./workorder.component.scss']
 })
 
 export class WorkOrderDetailsComponent implements OnInit {
