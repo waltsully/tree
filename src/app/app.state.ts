@@ -1,6 +1,6 @@
 import { IWorkOrderSummary } from './workorders/models/IWorkOrderSummary.model';
 
-export interface AppState {
+export interface IAppState {
     readonly workorders: IWorkOrderSummary[];
 }
 

@@ -1,6 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges,
          ViewEncapsulation } from '@angular/core';
-import { DatePipe } from '@angular/common';
+// import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { IAppState } from './app.state';
+import { State, selectHasError, selectErrorMessage } from './reducers';
 import { IQueueFocus } from './app-panels/queues/queues.component';
 import { IWorkOrderFocus } from './app-panels/workorder-list/workorderlist.component';
 
@@ -19,10 +23,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() userNetworkId: string;
     @Input() selectedWorkOrder: string;
 
-    public selectedQueueItemCount: number;
-    public today: Date;
+    selectedQueueItemCount: number;
+    today: Date;
+    hasError$: Observable<boolean>;
+    errorMessage$: Observable<string>;
 
-    constructor() {
+    constructor(private store: Store<State>) {
+
     }
 
     onSelectedQueueChanged($event: any) {

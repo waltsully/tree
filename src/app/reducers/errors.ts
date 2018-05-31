@@ -1,7 +1,6 @@
 // import { Action } from '@ngrx/store';
 import * as appActions from '../actions/app.actions';
 
-
 export interface State {
   hasError: boolean;
   errorMessage: string | null;

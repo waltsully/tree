@@ -9,8 +9,7 @@ export const reducers: ActionReducerMap<State> = {
   errors: fromErrors.reducer
 };
 
-
-// Selectors!
+// Selectors
 
 export const _selectErrors = (state: State) => state.errors;
 export const selectHasError = createSelector(_selectErrors, e => e.hasError);

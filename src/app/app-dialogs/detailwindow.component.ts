@@ -2,12 +2,12 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'app-workorder',
-  templateUrl: './workorder.component.html',
-  styleUrls: ['./workorder.component.scss']
+  selector: 'app-detailwindow',
+  templateUrl: './detailwindow.component.html',
+  styleUrls: ['./detailwindow.component.scss']
 })
 
-export class WorkOrderDetailsComponent implements OnInit {
+export class DetailWindowComponent implements OnInit {
   @Input() workOrderNumber: string;
   @Input() dialogOpened: boolean;
   @Output() childDialogMessage: EventEmitter<string> = new EventEmitter<string>();

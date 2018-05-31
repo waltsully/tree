@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
-import { reducers } from './store/reducers';
+import { reducers } from './reducers/index';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
@@ -23,7 +23,8 @@ import { AppComponent } from './app.component';
 import { QueuesComponent } from './app-panels/queues/queues.component';
 import { WorkOrderListComponent } from './app-panels/workorder-list/workorderlist.component';
 import { WorkOrderActivityComponent } from './app-panels/workorder-activity/workorderactivity.component';
-import { WorkOrderDetailsComponent } from './workorders/dialogs/workorder.component';
+import { DetailWindowComponent } from './app-dialogs/detailwindow.component';
+import { TopPanelComponent } from './workorders/forms/workorder-details/top-panel.component';
 import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
 
 
@@ -33,15 +34,16 @@ import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
         QueuesComponent,
         WorkOrderListComponent,
         WorkOrderActivityComponent,
-        WorkOrderDetailsComponent,
+        DetailWindowComponent,
+        TopPanelComponent,
         NewLineToHtmlBreak
     ],
     imports: [
-        // StoreModule.forRoot({message: simpleReducer}),
+        StoreModule.forRoot(reducers),
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        DatePipe,        
+        // DatePipe,        
         BrowserAnimationsModule,
         TreeViewModule,
         GridModule,
@@ -49,6 +51,8 @@ import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
         DropDownsModule,
         DialogsModule,
         LayoutModule,
+        StoreModule,
+        StoreDevtoolsModule,
         SpinnerModule.forRoot({  animation: 'spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite'})
     ],
     providers: [DatePipe],
