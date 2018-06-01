@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store';
 
-export const APPLICATION_START = '[app] start';
+export const APPLICATION_START = '[App] Start';
 export class ApplicationStart implements Action {
   readonly type = APPLICATION_START;
   constructor() { }
 }
 
-export const APPLICATION_ERROR = '[app] error';
+export const APPLICATION_ERROR = '[App] Error';
 export class ApplicationError implements Action {
   readonly type = APPLICATION_ERROR;
   constructor(public message: string) { }

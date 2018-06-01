@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { IWorkOrderSummary } from '../models/IWorkorderSummary.model';
-import * as actions from '../actions/workorders.actions';
+
+import * as actions from '../actions';
 
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { tassign } from 'tassign';
@@ -23,13 +24,16 @@ export const adapter = createEntityAdapter<WorkOrderEntity>({
 
 });
 
-// Note: WS 5/30/2018 
+// WSULLY 5/30/2018 
 // Initial data seeding for the panel of 3 top-level components is handled at application level during app start-up
 
 export function reducer(state: State = initialState, action: actions.ALL): State {
 
   switch (action.type) { 
-    case actions.LOAD_WORKORDERS_SUCCESS: {
+    case actions.LOAD_QUEUES_SUCCESS: {
+      console.log('STATE-->LOAD_QUEUESS_SUCESS');  
+       const newState = Object.assign({}, state);  
+       // to do: update state
       return adapter.addAll(action.workorders, state);
     }
   }

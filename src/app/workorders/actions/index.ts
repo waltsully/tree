@@ -2,18 +2,22 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { IWorkOrderSummary } from '../models/IWorkOrderSummary.model';
 import { IWorkOrderDetail} from '../models/IWorkOrderDetail.model';
-import { WorkOrderEntity } from '../reducers/workorders.reducer';
 
-export const LOAD_WORKORDERS = '[workorders] Load WorkOrders';
-export class LoadWorkOrders implements Action {
-  readonly type = LOAD_WORKORDERS;
+import * as fromWorkOrders from '../../workorders/reducers';
+
+export const LOAD_QUEUES = '[workorders] Load Queues';
+export class LoadQueues implements Action {
+  readonly type = LOAD_QUEUES;
   constructor() { }
 }
 
-export const LOAD_WORKORDERS_SUCCESS = '[workorders] Load WorkOrders Success';
-export class LoadWorkOrdersSuccess implements Action {
-  readonly type = LOAD_WORKORDERS_SUCCESS;
-  constructor(public workorders: WorkOrderEntity[]) { }
+export const LOAD_QUEUES_SUCCESS = '[workorders] Load Queues Success';
+export class LoadWorkQueuesSuccess implements Action {
+  readonly type = LOAD_QUEUES_SUCCESS;
+  constructor(public workorders: fromWorkOrders.WorkOrderEntity[]) {
+    console.log('ACTION-->LOAD_QUEUES_SUCCESS');
+    
+   }
 }
 
 export const EDIT_WORKORDER = '[workorders] Edit WorkOrder';
@@ -28,9 +32,5 @@ export class SaveWorkOrder implements Action {
   constructor() { }
 }
 
-export type ALL = 
-  LoadWorkOrders | 
-  LoadWorkOrdersSuccess | 
-  EditWorkOrder | 
-  SaveWorkOrder;
+export type ALL =  LoadQueues |  LoadWorkQueuesSuccess | EditWorkOrder | SaveWorkOrder;
 

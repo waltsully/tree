@@ -1,5 +1,10 @@
 <img class="logo" src="./assets/logo.png" alt="e-ins logo"><span class="apptitle">Web Work Order System</span>
-
+<header>
+    STATE--> {{ panelState$ | async }}
+  <div class="alert alert-danger"  *ngIf="hasError$ | async">
+  <h3>{{ errorMessage$ | async }}</h3>
+  </div>
+</header>
 <div class= "appframe">
   <div class="leftpanel">
     <app-queues (selectedQueue)='onSelectedQueueChanged($event)'>
