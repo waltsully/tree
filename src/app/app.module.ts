@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
-import { reducers } from './reducers/index';
+import { reducer } from './store/reducers';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
@@ -38,8 +38,7 @@ import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
         TopPanelComponent,
         NewLineToHtmlBreak
     ],
-    imports: [
-        StoreModule.forRoot(reducers),
+    imports: [        
         BrowserModule,
         FormsModule,
         HttpClientModule,
@@ -53,7 +52,7 @@ import { NewLineToHtmlBreak } from './utility/nl2br.pipe';
         LayoutModule,
         StoreModule,
         StoreDevtoolsModule,
-        StoreModule.forRoot(reducers),
+        StoreModule.forRoot(reducer),
             StoreDevtoolsModule.instrument({
             maxAge: 10
             }),

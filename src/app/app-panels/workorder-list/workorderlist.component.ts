@@ -50,7 +50,7 @@ export class WorkOrderListComponent implements OnInit, AfterViewInit, OnChanges 
     }
 
     ngOnChanges() {
-        console.log('WorkOrderListComponent: ngOnChanges: showDetailsForm:' +  this.openDetail);
+        // console.log('WorkOrderListComponent: ngOnChanges: showDetailsForm:' +  this.openDetail);
         console.log('WorkOrderListComponent: ngOnChanges: selectedQueueId: ' + this.selectedQueueId + ' id=' + this.userNetworkId);
         if (this.selectedQueueName) {
          // if queue is defined it means it changed and we need to load a new set of workorders...

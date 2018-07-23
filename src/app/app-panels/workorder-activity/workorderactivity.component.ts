@@ -12,7 +12,7 @@ import { WorkOrderActivityService } from './workorderactivity.service';
   styleUrls: ['./workorderactivity.component.scss'],
   providers: [WorkOrderActivityService]
 })
-export class WorkOrderActivityComponent implements OnInit, OnChanges {
+export class WorkOrderActivityComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('activitygrid') activityGrid: GridComponent;
   @Input() userNetworkId: string;
   @Input() selectedWorkOrder: string;
@@ -30,6 +30,10 @@ export class WorkOrderActivityComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     console.log('WorkOrderActivity: ngOnInit: fired ');
   }
+
+  ngAfterViewInit(): void {
+    console.log('WorkOrderActivity: ngAfterViewInit fired.');
+}
 
   ngOnChanges(): void {
     console.log('WorkOrderActivity: ngOnChanges: selectedWorkOrder: ' + this.selectedWorkOrder + ' id=' + this.userNetworkId);

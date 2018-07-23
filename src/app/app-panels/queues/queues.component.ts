@@ -6,14 +6,10 @@ import { QueuesService } from './queues.service';
 import { IQueue } from '../../workorders/models/IQueue.model';
 import { TreeViewComponent, TreeItem } from '@progress/kendo-angular-treeview';
 
-
 import { Store } from '@ngrx/store';
-import { State } from '../../reducers';
-import { LoadQueues } from '../../workorders/actions';
-// import * as actions from '../../workorders/actions';
-
-
-const is = (fileName: string, ext: string) => new RegExp(`.${ext}\$`).test(fileName); // left over from the demo of placing an icon
+import { IAppState } from '../../store/IAppState';
+import { LoadQueues, LoadQueuesSuccess } from '../../store/actions';
+// import { JsonpCallbackContext } from '@angular/common/http';
 
 export interface IQueueFocus {
     userName: string;
@@ -35,8 +31,8 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     @ViewChild('ktree') ktree: TreeViewComponent;
     @Output() selectedQueue: EventEmitter<IQueueFocus> = new EventEmitter<IQueueFocus>( );
 
-    private dataService;
-    private store: Store<State>;
+    // private dataService;
+
     private queueInFocus = <IQueueFocus>{};
     public queues: IQueue[] = [];
     public showAnimation = true;
@@ -46,21 +42,23 @@ export class QueuesComponent implements OnInit, AfterViewInit {
     public hasChildren = (item: any) => item.Children && item.Children.length > 0;
     public fetchChildren = (item: any) => of(item.Children);
 
-    constructor(queuesService: QueuesService, store: Store<State>) {
-        this.dataService = queuesService;
-        this.store = store;
+    constructor(private queuesService: QueuesService, private store: Store<IAppState>) {
+        this.queuesService = queuesService;   
+        this.store = store;     
     }
 
     ngOnInit(): void {
+        console.log('QueuesComponent: store=  ***UNKNOWN***'); // + JSON.stringify(this.store));
         console.log('QueuesComponent: ngOnInit fired. Waiting for data...');
-        this.dataService.getQueues()
+        this.store.dispatch(new LoadQueues());
+        this.queuesService.getQueues()
             .subscribe(queues => {
                 this.queues = queues;
                 this.showAnimation = false;
                 console.log('QueuesComponent: * * * * * * * * * * HIDING SPINNER');
                 console.log('QueuesComponent: data loaded'); // + JSON.stringify(this.queues));
-                this.doSelectDefault();
-                this.store.dispatch(new LoadQueues());
+                this.doSelectDefault();   
+                this.store.dispatch(new LoadQueuesSuccess());             
             },
                 ex => this.errorMessage = <any>ex);
     }

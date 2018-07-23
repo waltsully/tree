@@ -3,9 +3,8 @@ import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChange
 // import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { Store, _createStoreReducers } from '@ngrx/store';
-import { IAppState } from './app.state';
-import { State, selectHasError, selectErrorMessage, selectPanelState } from './reducers';
-import { ApplicationStart } from './actions/app.actions';
+import { IAppState } from './store/IAppState';
+import { ApplicationStart } from './store/actions';
 import { IQueueFocus } from './app-panels/queues/queues.component';
 import { IWorkOrderFocus } from './app-panels/workorder-list/workorderlist.component';
 import { Action } from 'rxjs/internal/scheduler/Action';
@@ -25,14 +24,15 @@ export class AppComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() userNetworkId: string;
     @Input() selectedWorkOrder: string;
 
+    title = 'My App Works!';
     selectedQueueItemCount: number;
     today: Date;
     panelState$: Observable<string>;
     hasError$: Observable<boolean>;
     errorMessage$: Observable<string>;
 
-    constructor(private store: Store<State>) {
-       
+    constructor(private store: Store<IAppState>) {
+        console.log('We have a store! ' + store);
     }
 
     onSelectedQueueChanged($event: any) {
@@ -56,9 +56,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnChanges {
         console.log('AppComponent: ngOnInit fired. Dispatching: ApplicationStart');
         this.today = new Date();
         this.store.dispatch(new ApplicationStart());
-        this.panelState$ = this.store.select(selectPanelState);        
-        this.hasError$ = this.store.select(selectHasError);
-        this.errorMessage$ = this.store.select(selectErrorMessage);
+        // this.panelState$ = this.store.select(selectPanelState);        
+        // this.hasError$ = this.store.select(selectHasError);
+        // this.errorMessage$ = this.store.select(selectErrorMessage);
      }
 
     ngAfterViewInit(): void {
